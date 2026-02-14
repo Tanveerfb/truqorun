@@ -1,65 +1,111 @@
-import Image from "next/image";
+/**
+ * Home Page
+ * 
+ * Main landing page showcasing the Truqorun brand and component system.
+ * Demonstrates light/dark mode theming and design system components.
+ * 
+ * [PLACEHOLDER]: Replace with actual content from /content/WEBSITE_COPY.md
+ */
+
+import { Container, Card, Button } from "@/components";
+import { ThemeToggle } from "@/components/layout";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen bg-background">
+      {/* Navigation Bar */}
+      <nav className="border-b border-border">
+        <Container>
+          <div className="flex h-16 items-center justify-between">
+            <h1 className="text-xl font-bold">Truqorun</h1>
+            <ThemeToggle />
+          </div>
+        </Container>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="py-20">
+        <Container size="lg">
+          <div className="text-center">
+            <h1 className="mb-6 text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+              Modern Web Development
+              <span className="block text-primary">Built for the Future</span>
+            </h1>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-foreground-secondary">
+              Premium web development services with cutting-edge technology and
+              24-hour response time. We build modern, scalable applications that
+              drive business growth.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button variant="primary" size="lg">
+                Get Started
+              </Button>
+              <Button variant="secondary" size="lg">
+                View Portfolio
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Features Section */}
+      <section className="border-t border-border bg-background-secondary py-20">
+        <Container size="lg">
+          <h2 className="mb-12 text-center text-3xl font-bold">
+            Our Services
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <Card>
+              <h3 className="mb-3 text-xl font-semibold">Web Development</h3>
+              <p className="text-foreground-secondary">
+                Custom web applications built with Next.js, React, and modern
+                technologies for optimal performance and user experience.
+              </p>
+            </Card>
+            <Card>
+              <h3 className="mb-3 text-xl font-semibold">UI/UX Design</h3>
+              <p className="text-foreground-secondary">
+                Beautiful, intuitive interfaces designed with your users in
+                mind. Every pixel crafted for maximum impact and usability.
+              </p>
+            </Card>
+            <Card>
+              <h3 className="mb-3 text-xl font-semibold">Consulting</h3>
+              <p className="text-foreground-secondary">
+                Expert technical guidance to help you make the right technology
+                decisions for your business goals and requirements.
+              </p>
+            </Card>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <Container size="md">
+          <Card className="text-center">
+            <h2 className="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
+            <p className="mb-6 text-lg text-foreground-secondary">
+              Let's discuss your project and build something amazing together.
+            </p>
+            <Button variant="primary" size="lg">
+              Contact Us
+            </Button>
+          </Card>
+        </Container>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-background-secondary py-8">
+        <Container>
+          <div className="text-center text-sm text-foreground-secondary">
+            <p>© 2026 Truqorun. All rights reserved.</p>
+            <p className="mt-2">
+              Built with Next.js, React, TypeScript, and Tailwind CSS
+            </p>
+          </div>
+        </Container>
+      </footer>
     </div>
   );
 }

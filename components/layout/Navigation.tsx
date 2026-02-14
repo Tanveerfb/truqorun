@@ -3,27 +3,42 @@
 /**
  * Navigation Component
  * 
- * Responsive site navigation bar with:
+ * Enhanced responsive site navigation bar with modular components.
+ * 
+ * Features:
+ * - Modular component architecture (NavLogo, NavLink, MobileMenu, etc.)
+ * - Active page highlighting with pathname detection
  * - Branding and page links
- * - Theme toggle
- * - Mobile hamburger menu
- * - Accessibility features (skip link, aria labels)
+ * - Theme toggle integration
+ * - Mobile hamburger menu with animations
+ * - Full accessibility (skip link, ARIA labels, keyboard navigation)
+ * - Dark mode compatible throughout
+ * - Smooth transitions and hover effects
+ * 
+ * [PLACEHOLDER]: Update navLinks array with final Truqorun page links
+ * [PLACEHOLDER]: Replace NavLogo text with actual logo image when available
  * 
  * @example
  * ```tsx
  * <Navigation />
  * ```
+ * 
+ * @module components/layout/Navigation
  */
 
 import { Container } from "@/components/ui";
 import { ThemeToggle } from "@/components/layout";
-import Link from "next/link";
+import { NavLogo, NavLink, MobileMenu, MobileMenuButton } from "@/components/layout/navbar";
+import type { NavLinkItem } from "@/components/layout/navbar";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export function Navigation() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  // [PLACEHOLDER]: Update these links based on final Truqorun site structure
+  const navLinks: NavLinkItem[] = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
@@ -53,94 +68,41 @@ export function Navigation() {
       <nav className="border-b border-border" aria-label="Main navigation">
         <Container>
           <div className="flex h-16 items-center justify-between">
-            {/* Logo/Brand */}
-            <Link 
-              href="/" 
-              className="text-xl font-bold hover:text-primary transition-colors"
-              aria-label="Truqorun home"
-            >
-              Truqorun
-            </Link>
+            {/* Logo/Brand - Modular component */}
+            <NavLogo />
 
             {/* Navigation Links - Desktop */}
             <div className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
-                <Link
+                <NavLink
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </Link>
+                  label={link.label}
+                  isActive={pathname === link.href}
+                />
               ))}
             </div>
 
             {/* Mobile Menu Button + Theme Toggle */}
             <div className="flex items-center gap-4">
-              {/* Mobile Menu Button */}
-              <button
+              {/* Mobile Menu Button - Modular component */}
+              <MobileMenuButton
+                isOpen={isMobileMenuOpen}
                 onClick={toggleMobileMenu}
-                className="md:hidden p-2 rounded-md hover:bg-surface-secondary transition-colors"
-                aria-label="Toggle mobile menu"
-                aria-expanded={isMobileMenuOpen}
-                aria-controls="mobile-menu"
-              >
-                {isMobileMenuOpen ? (
-                  // Close icon
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  // Hamburger icon
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
-              </button>
+              />
 
               {/* Theme Toggle */}
               <ThemeToggle />
             </div>
           </div>
 
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div 
-              id="mobile-menu"
-              className="md:hidden py-4 border-t border-border"
-            >
-              <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMobileMenu}
-                    className="text-sm font-medium text-foreground-secondary hover:text-primary transition-colors py-2"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Mobile Menu - Modular component */}
+          <MobileMenu
+            isOpen={isMobileMenuOpen}
+            navLinks={navLinks}
+            activePath={pathname}
+            onClose={closeMobileMenu}
+          />
         </Container>
       </nav>
     </>

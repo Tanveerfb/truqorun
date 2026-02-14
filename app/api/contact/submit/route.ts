@@ -1,24 +1,24 @@
 /**
  * Contact Form Submission API Route
- * 
+ *
  * Handles form submissions from the contact/quote form.
- * 
+ *
  * Features:
  * - Validates form data using Zod schema
  * - Stores submission in Supabase database
  * - Sends email notification to admin
  * - Returns success/error response
- * 
+ *
  * [SECURITY]: All sensitive operations are server-side only
  * [PLACEHOLDER]: Add rate limiting and spam protection
- * 
+ *
  * @module app/api/contact/submit/route
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin, isSupabaseAdminConfigured } from '@/lib/supabase';
-import { contactFormSchema, sanitizeFormData } from '@/lib/formValidation';
-import type { ContactFormData } from '@/types/form';
+import { NextRequest, NextResponse } from "next/server";
+import { supabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase";
+import { contactFormSchema, sanitizeFormData } from "@/lib/formValidation";
+import type { ContactFormData } from "@/types/form";
 
 /**
  * POST handler for form submission
@@ -35,10 +35,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Invalid form data',
+          error: "Invalid form data",
           details: issues,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -47,31 +47,35 @@ export async function POST(request: NextRequest) {
 
     // Check if Supabase is configured
     if (!isSupabaseAdminConfigured() || !supabaseAdmin) {
-      console.error('[API] Supabase is not configured');
-      
+      console.error("[API] Supabase is not configured");
+
       // [DEVELOPMENT MODE]: Log submission and return success
       // In production, this should return an error
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[API] Form submission (Supabase not configured):', formData);
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          "[API] Form submission (Supabase not configured):",
+          formData,
+        );
         return NextResponse.json({
           success: true,
-          message: 'Form submitted successfully (development mode - not saved to database)',
+          message:
+            "Form submitted successfully (development mode - not saved to database)",
         });
       }
 
       return NextResponse.json(
         {
           success: false,
-          error: 'Service configuration error. Please try again later.',
+          error: "Service configuration error. Please try again later.",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     // Insert into Supabase
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data, error } = await (supabaseAdmin as any)
-      .from('form_submissions')
+      .from("form_submissions")
       .insert({
         project_type: formData.projectType as string,
         selected_features: formData.selectedFeatures,
@@ -86,24 +90,24 @@ export async function POST(request: NextRequest) {
         email: formData.email,
         phone: formData.phone || null,
         best_time_to_contact: formData.bestTimeToContact as string,
-        status: 'new',
+        status: "new",
         submitted_at: new Date().toISOString(),
       })
-      .select('id')
+      .select("id")
       .single();
 
     if (error) {
-      console.error('[API] Supabase error:', error);
+      console.error("[API] Supabase error:", error);
       return NextResponse.json(
         {
           success: false,
-          error: 'Failed to save submission. Please try again.',
+          error: "Failed to save submission. Please try again.",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    const submissionId = (data as { id?: string })?.id || 'unknown';
+    const submissionId = (data as { id?: string })?.id || "unknown";
 
     // Send email notification
     // [PLACEHOLDER]: Implement email notification
@@ -111,22 +115,22 @@ export async function POST(request: NextRequest) {
       await sendEmailNotification(formData, submissionId);
     } catch (emailError) {
       // Log error but don't fail the submission
-      console.error('[API] Email notification error:', emailError);
+      console.error("[API] Email notification error:", emailError);
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Form submitted successfully',
+      message: "Form submitted successfully",
       submissionId: submissionId,
     });
   } catch (error) {
-    console.error('[API] Unexpected error:', error);
+    console.error("[API] Unexpected error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: 'An unexpected error occurred. Please try again.',
+        error: "An unexpected error occurred. Please try again.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -137,14 +141,14 @@ export async function POST(request: NextRequest) {
  */
 async function sendEmailNotification(
   formData: ContactFormData,
-  submissionId: string
+  submissionId: string,
 ): Promise<void> {
   // Check if Resend API key is configured
   const resendApiKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_EMAIL;
 
   if (!resendApiKey || !adminEmail) {
-    console.warn('[API] Email not configured. Skipping email notification.');
+    console.warn("[API] Email not configured. Skipping email notification.");
     return;
   }
 
@@ -155,15 +159,15 @@ async function sendEmailNotification(
   const resend = new Resend(resendApiKey);
 
   await resend.emails.send({
-    from: 'noreply@truqorun.com',
+    from: 'noreply@truqorun.com', // Must be verified with Resend
     to: adminEmail,
     subject: `New Project Inquiry from ${formData.fullName}`,
     html: generateEmailHtml(formData, submissionId),
   });
   */
 
-  console.log('[API] Email notification would be sent to:', adminEmail);
-  console.log('[API] Submission ID:', submissionId);
+  console.log("[API] Email notification would be sent to:", adminEmail);
+  console.log("[API] Submission ID:", submissionId);
 }
 
 /**
@@ -171,7 +175,7 @@ async function sendEmailNotification(
  */
 export function generateEmailHtml(
   formData: ContactFormData,
-  submissionId: string
+  submissionId: string,
 ): string {
   return `
     <h2>New Project Inquiry</h2>
@@ -181,7 +185,7 @@ export function generateEmailHtml(
     <ul>
       <li><strong>Name:</strong> ${formData.fullName}</li>
       <li><strong>Email:</strong> ${formData.email}</li>
-      <li><strong>Phone:</strong> ${formData.phone || 'Not provided'}</li>
+      <li><strong>Phone:</strong> ${formData.phone || "Not provided"}</li>
       <li><strong>Best Time:</strong> ${formData.bestTimeToContact}</li>
     </ul>
     
@@ -200,10 +204,10 @@ export function generateEmailHtml(
         ? `
       <h3>Selected Features</h3>
       <ul>
-        ${formData.selectedFeatures.map((feature) => `<li>${feature}</li>`).join('')}
+        ${formData.selectedFeatures.map((feature) => `<li>${feature}</li>`).join("")}
       </ul>
     `
-        : ''
+        : ""
     }
     
     ${
@@ -212,10 +216,10 @@ export function generateEmailHtml(
       <h3>Company Information</h3>
       <ul>
         <li><strong>Company:</strong> ${formData.companyName}</li>
-        ${formData.companyWebsite ? `<li><strong>Website:</strong> ${formData.companyWebsite}</li>` : ''}
+        ${formData.companyWebsite ? `<li><strong>Website:</strong> ${formData.companyWebsite}</li>` : ""}
       </ul>
     `
-        : ''
+        : ""
     }
   `;
 }

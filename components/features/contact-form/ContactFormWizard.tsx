@@ -734,7 +734,7 @@ export const ContactFormWizard: React.FC = () => {
 
       {/* Step Content */}
       <div
-        className="mb-8 min-h-[400px]"
+        className="mb-8 min-h-100"
         role="region"
         aria-label={`Step ${currentStep}: ${FORM_STEPS[currentStep - 1]?.title}`}
       >

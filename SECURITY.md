@@ -10,7 +10,7 @@ The Truqorun team takes security vulnerabilities seriously. We appreciate your e
 
 Instead, please report security vulnerabilities by emailing:
 
-📧 **security@truqorun.com** [PLACEHOLDER]
+📧 **truqorun@proton.me**
 
 ### What to Include
 
@@ -37,10 +37,10 @@ Please include as much of the following information as possible:
 
 We currently support security updates for the following versions:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.1.x   | ✅ Yes             |
-| < 0.1   | ❌ No              |
+| Version | Supported |
+| ------- | --------- |
+| 0.1.x   | ✅ Yes    |
+| < 0.1   | ❌ No     |
 
 ---
 
@@ -154,9 +154,9 @@ By reporting a security vulnerability, you agree to:
 
 ## 📞 Contact
 
-For security concerns: security@truqorun.com [PLACEHOLDER]
+For security concerns: truqorun@proton.me
 
-For general questions: hello@truqorun.com [PLACEHOLDER]
+For general questions: truqorun@proton.me
 
 ---
 

@@ -29,7 +29,7 @@ We want to make contributing to this project as easy and transparent as possible
 
 ## 📜 Code of Conduct
 
-This project and everyone participating in it is governed by respect, professionalism, and inclusivity. By participating, you are expected to uphold these values. Please report unacceptable behavior to hello@truqorun.com [PLACEHOLDER].
+This project and everyone participating in it is governed by respect, professionalism, and inclusivity. By participating, you are expected to uphold these values. Please report unacceptable behavior to truqorun@proton.me.
 
 ---
 
@@ -94,6 +94,7 @@ git checkout -b docs/documentation-update
 ```
 
 **Branch Naming Conventions:**
+
 - `feature/` - New features
 - `fix/` - Bug fixes
 - `docs/` - Documentation updates
@@ -154,6 +155,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ### Scope (Optional)
 
 The scope should specify the area of the codebase:
+
 - `ui` - UI components
 - `layout` - Layout components
 - `theme` - Theme system
@@ -200,6 +202,7 @@ chore(deps): update Next.js to version 16.1
 ### PR Title
 
 Use the same format as commit messages:
+
 ```
 feat(ui): add new Button variants
 ```
@@ -249,19 +252,19 @@ The template will be auto-filled when you create a PR. Please fill out all secti
 
 ### Component Structure
 
-```tsx
+````tsx
 /**
  * Component Name
- * 
+ *
  * Brief description of what the component does.
- * 
+ *
  * @example
  * ```tsx
  * <ComponentName prop="value" />
  * ```
  */
 
-import React from 'react';
+import React from "react";
 
 export interface ComponentNameProps {
   /** Prop description */
@@ -269,15 +272,11 @@ export interface ComponentNameProps {
 }
 
 export function ComponentName({ propName }: ComponentNameProps) {
-  return (
-    <div>
-      {/* Component content */}
-    </div>
-  );
+  return <div>{/* Component content */}</div>;
 }
 
 export default ComponentName;
-```
+````
 
 ### Styling
 
@@ -390,6 +389,7 @@ When adding a new component:
 ## 🎯 Good First Issues
 
 Look for issues labeled with:
+
 - `good first issue` - Great for newcomers
 - `help wanted` - We need community help
 - `documentation` - Documentation improvements
@@ -407,6 +407,7 @@ Look for issues labeled with:
 ## 🙏 Recognition
 
 All contributors will be recognized in:
+
 - GitHub contributors list
 - Release notes
 - Project documentation

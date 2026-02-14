@@ -29,16 +29,19 @@ Truqorun is a modern web development startup focused on delivering high-quality,
 ## 🛠️ Tech Stack
 
 ### Core Framework
+
 - **[Next.js 16.1](https://nextjs.org/)** - React framework with App Router
 - **[React 19.2](https://react.dev/)** - UI library with latest features
 - **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe JavaScript
 
 ### Styling & Design
+
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk)** - Heading font
 - **[Inter](https://fonts.google.com/specimen/Inter)** - Body text font
 
 ### Development Tools
+
 - **[ESLint](https://eslint.org/)** - Code linting and quality
 - **[PostCSS](https://postcss.org/)** - CSS processing
 
@@ -54,12 +57,14 @@ Truqorun is a modern web development startup focused on delivering high-quality,
 ### Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Tanveerfb/truqorun.git
    cd truqorun
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -71,12 +76,14 @@ Truqorun is a modern web development startup focused on delivering high-quality,
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.local.example .env.local
    # Edit .env.local with your configuration
    ```
 
 4. **Run the development server**
+
    ```bash
    npm run dev
    # or
@@ -88,7 +95,7 @@ Truqorun is a modern web development startup focused on delivering high-quality,
    ```
 
 5. **Open your browser**
-   
+
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -139,6 +146,7 @@ Our design system includes a comprehensive color palette optimized for both ligh
 ### Theme System
 
 The application supports three theme modes:
+
 - **Light Mode** - Clean, bright interface
 - **Dark Mode** - Rich, comfortable dark interface
 - **System** - Automatically matches OS preference
@@ -169,6 +177,7 @@ Users can toggle between modes using the theme switcher in the navigation.
 - **Main** - Semantic main content wrapper
 
 All components include:
+
 - ✅ TypeScript types
 - ✅ JSDoc documentation
 - ✅ Accessibility features
@@ -180,6 +189,7 @@ All components include:
 The Navigation component has been enhanced with a modular architecture for better maintainability and reusability:
 
 **Features:**
+
 - 🎯 **Active State Highlighting** - Visual indication of current page using Next.js pathname detection
 - 📱 **Mobile Responsive** - Slide-down menu with smooth animations for small screens
 - ♿ **Fully Accessible** - WCAG 2.1 AA compliant with skip links, ARIA labels, and keyboard navigation
@@ -188,6 +198,7 @@ The Navigation component has been enhanced with a modular architecture for bette
 - 🎨 **Customizable** - Easy to update links, styling, and branding
 
 **Components:**
+
 - `Navigation` - Main orchestrator component
 - `NavLogo` - Brand/logo display ([PLACEHOLDER] for actual logo image)
 - `NavLink` - Individual navigation link with active state
@@ -277,6 +288,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) for commi
 ### 📋 Upcoming Features
 
 **High Priority (Good First Issues)**
+
 - [ ] Dashboard authentication system
 - [ ] Rate limiting for API endpoints
 - [ ] Blog CMS integration (MDX or Sanity)
@@ -286,6 +298,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) for commi
 - [ ] SEO optimization (meta tags, sitemap)
 
 **Medium Priority**
+
 - [ ] Analytics integration (Vercel/Google Analytics)
 - [ ] Performance monitoring
 - [ ] E2E testing (Playwright)
@@ -294,6 +307,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) for commi
 - [ ] Search functionality
 
 **Low Priority**
+
 - [ ] CI/CD pipeline enhancements
 - [ ] Internationalization (i18n)
 - [ ] Advanced animations and transitions
@@ -334,7 +348,7 @@ For security concerns, please review our [Security Policy](SECURITY.md).
 
 Interested in working with us? We'd love to hear from you!
 
-- **Email**: [hello@truqorun.com](mailto:hello@truqorun.com)
+- **Email**: [truqorun@proton.me](mailto:truqorun@proton.me)
 - **GitHub**: [github.com/Tanveerfb/truqorun](https://github.com/Tanveerfb/truqorun)
 - **Issue Tracker**: [Report a bug or request a feature](https://github.com/Tanveerfb/truqorun/issues)
 

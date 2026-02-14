@@ -8,11 +8,21 @@
  */
 
 /**
+ * Dropdown menu item
+ */
+export interface DropdownItem {
+  /** Link URL/path */
+  href: string;
+  /** Display label */
+  label: string;
+}
+
+/**
  * Navigation link item
  */
 export interface NavLinkItem {
   /** Link URL/path */
-  href: string;
+  href?: string;
   /** Display label */
   label: string;
   /** Optional icon component */
@@ -21,6 +31,8 @@ export interface NavLinkItem {
   external?: boolean;
   /** Background color on hover/active */
   color?: "primary" | "accent" | "success" | "warning" | "danger";
+  /** Optional dropdown items (makes this a dropdown menu) */
+  dropdown?: DropdownItem[];
 }
 
 /**
@@ -73,4 +85,18 @@ export interface MobileMenuProps {
   activePath?: string;
   /** Close menu handler */
   onClose: () => void;
+}
+
+/**
+ * Props for NavDropdown component
+ */
+export interface NavDropdownProps {
+  /** Display label */
+  label: string;
+  /** Dropdown menu items */
+  items: DropdownItem[];
+  /** Whether this section is active */
+  isActive?: boolean;
+  /** Background color on hover/active */
+  color?: "primary" | "accent" | "success" | "warning" | "danger";
 }

@@ -1,18 +1,19 @@
 /**
  * Contact Page
- * 
+ *
  * Contact form and information for getting in touch.
  * Features multi-step form for project quotes.
  */
 
-import { Metadata } from 'next';
-import { Container, Section, Heading, Paragraph, Card } from '@/components';
-import { Header, Footer, Main, Navigation } from '@/components/layout';
-import { ContactFormWizard } from '@/components/features/contact-form';
+import { Metadata } from "next";
+import { Container, Section, Heading, Paragraph, Card } from "@/components";
+import { Header, Footer, Main, Navigation } from "@/components/layout";
+import { ContactFormWizard } from "@/components/features/contact-form";
 
 export const metadata: Metadata = {
-  title: 'Contact Us - Truqorun',
-  description: 'Get in touch with Truqorun for a free quote or to discuss your web development project.',
+  title: "Contact Us - Truqorun",
+  description:
+    "Get in touch with Truqorun for a free quote or to discuss your web development project.",
 };
 
 export default function ContactPage() {
@@ -31,8 +32,8 @@ export default function ContactPage() {
                 Get in Touch
               </Heading>
               <Paragraph size="lg" className="mx-auto max-w-3xl">
-                Ready to start your project? Fill out the form below and we&apos;ll 
-                get back to you within 24 hours with a free quote.
+                Ready to start your project? Fill out the form below and
+                we&apos;ll get back to you within 24 hours with a free quote.
               </Paragraph>
             </div>
           </Container>
@@ -49,10 +50,11 @@ export default function ContactPage() {
             </Card>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-
               {/* Contact Info & Requirements */}
               <Card>
-                <h3 className="mb-4 text-lg font-semibold">Contact Information</h3>
+                <h3 className="mb-4 text-lg font-semibold">
+                  Contact Information
+                </h3>
                 <div className="space-y-3 text-sm">
                   <div>
                     <p className="font-medium text-foreground">Response Time</p>
@@ -60,7 +62,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">Email</p>
-                    <p className="text-foreground-secondary">hello@truqorun.com</p>
+                    <p className="text-foreground-secondary">
+                      truqorun@proton.me
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -98,8 +102,8 @@ export default function ContactPage() {
               <Card>
                 <h3 className="mb-4 text-lg font-semibold">Why Choose Us?</h3>
                 <p className="text-sm text-foreground-secondary">
-                  Modern technology stack, responsive design, and ongoing support
-                  for your business growth.
+                  Modern technology stack, responsive design, and ongoing
+                  support for your business growth.
                 </p>
               </Card>
             </div>

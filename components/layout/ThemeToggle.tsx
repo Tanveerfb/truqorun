@@ -105,7 +105,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={cycleTheme}
-      className="rounded-lg p-2 text-gray-900 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:text-gray-200 dark:hover:bg-gray-800"
+      className="rounded-lg p-2 text-foreground bg-background-secondary border border-border transition-colors hover:bg-border hover:border-primary/50 "
       aria-label={getLabel()}
       title={getLabel()}
     >

@@ -1,9 +1,9 @@
 /**
  * Header Component
- * 
+ *
  * Site-wide header component that wraps the navigation bar.
  * Provides consistent header layout across all pages.
- * 
+ *
  * @example
  * ```tsx
  * <Header>
@@ -12,7 +12,7 @@
  * ```
  */
 
-import React from 'react';
+import React from "react";
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /** Header content (typically navigation) */
@@ -26,12 +26,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
  */
 export const Header: React.FC<HeaderProps> = ({
   children,
-  className = '',
+  className = "",
   ...props
 }) => {
   return (
     <header
-      className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${className}`}
+      className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 ${className}`}
       {...props}
     >
       {children}

@@ -91,7 +91,7 @@ rm -rf .next
 4. Check browser console and terminal for errors
 5. See the Troubleshooting section in `ENVIRONMENT_SETUP.md`
 
-## ✨ You're All Set!
+## ✨ You're All Set
 
 Once you've completed this checklist, you're ready to start developing!
 

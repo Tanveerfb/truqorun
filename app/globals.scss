@@ -1,0 +1,296 @@
+/**
+ * Global Styles and Theme Configuration
+ * 
+ * This file sets up:
+ * - Tailwind CSS imports
+ * - CSS custom properties for theming
+ * - Color system for light and dark modes
+ * - Typography configuration
+ * - Brand colors for Truqorun
+ * 
+ * Typography Stack:
+ * - Space Grotesk: Headings (--font-space-grotesk)
+ * - Inter: Body text (--font-inter)
+ */
+
+@use "sass:color";
+@import "tailwindcss";
+
+/* ============================================
+   Brand Colors
+   ============================================ */
+
+// Truqorun Brand Palette
+$brand-sky-aqua: #4ef9ff; // Sky Aqua - Primary
+$brand-light-green: #7cf9a8; // Light Green - Success
+$brand-turquoise: #a8ffa2; // Turquoise - Accent
+
+// Color assignments
+$brand-primary: $brand-sky-aqua;
+$brand-primary-dark: color.adjust(
+  $brand-sky-aqua,
+  $lightness: 10%
+); // Lighter for dark mode
+$brand-accent: $brand-turquoise;
+$brand-accent-dark: color.adjust($brand-turquoise, $lightness: 8%);
+$brand-success: $brand-light-green;
+$brand-success-dark: color.adjust($brand-light-green, $lightness: 8%);
+$brand-warning: #fbbf24; // Amber-400
+$brand-danger: #ef4444; // Red-500
+$brand-danger-dark: #f87171; // Red-400 (for dark mode)
+
+// Background colors
+$bg-light: #fafafa;
+$bg-light-secondary: #f5f5f5;
+$bg-dark: #0a0a0a;
+$bg-dark-secondary: #171717;
+
+// Text colors
+$text-light: #111827;
+$text-light-secondary: #4b5563;
+$text-light-muted: #9ca3af;
+$text-dark: #fafafa;
+$text-dark-secondary: #d4d4d4;
+$text-dark-muted: #737373;
+
+// Border colors
+$border-light: #e5e7eb;
+$border-light-secondary: #f3f4f6;
+$border-dark: #262626;
+$border-dark-secondary: #171717;
+
+/* ============================================
+   CSS Custom Properties (Theme Variables)
+   ============================================ */
+
+:root {
+  /* Background colors */
+  --background: 255 255 255; /* white */
+  --background-secondary: 249 250 251; /* gray-50 */
+
+  /* Foreground colors */
+  --foreground: 17 24 39; /* gray-900 */
+  --foreground-secondary: 75 85 99; /* gray-600 */
+  --foreground-muted: 156 163 175; /* gray-400 */
+
+  /* Brand colors */
+  --primary: 4 213 242; /* sky-aqua #04D5F2 */
+  --primary-foreground: 255 255 255;
+
+  /* Accent colors */
+  --accent: 76 213 202; /* turquoise #4CD5CA */
+  --accent-foreground: 255 255 255;
+
+  /* Border colors */
+  --border: 229 231 235; /* gray-200 */
+  --border-secondary: 243 244 246; /* gray-100 */
+
+  /* Success, warning, danger */
+  --success: 142 220 137; /* light-green #8EDC89 */
+  --warning: 251 191 36; /* amber-400 */
+  --danger: 239 68 68; /* red-500 */
+
+  /* Card and surface colors */
+  --card: 255 255 255;
+  --card-border: 229 231 235;
+
+  /* Input colors */
+  --input: 255 255 255;
+  --input-border: 209 213 219; /* gray-300 */
+
+  /* Shadow values */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  /* Border radius */
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   Dark Mode Theme Variables
+   ============================================ */
+
+.dark {
+  /* Background colors - rich dark theme */
+  --background: 10 10 10; /* near-black */
+  --background-secondary: 23 23 23; /* gray-950 */
+
+  /* Foreground colors */
+  --foreground: 250 250 250; /* gray-50 */
+  --foreground-secondary: 212 212 212; /* gray-300 */
+  --foreground-muted: 115 115 115; /* gray-500 */
+
+  /* Brand colors - adjusted for dark mode */
+  --primary: 29 229 255; /* lighter sky-aqua */
+  --primary-foreground: 10 10 10;
+
+  /* Accent colors */
+  --accent: 102 229 217; /* lighter turquoise */
+  --accent-foreground: 10 10 10;
+
+  /* Border colors */
+  --border: 38 38 38; /* gray-800 */
+  --border-secondary: 23 23 23; /* gray-950 */
+
+  /* Success, warning, danger */
+  --success: 163 236 159; /* lighter light-green */
+  --warning: 251 191 36; /* amber-400 */
+  --danger: 248 113 113; /* red-400 */
+
+  /* Card and surface colors */
+  --card: 23 23 23; /* gray-950 */
+  --card-border: 38 38 38; /* gray-800 */
+
+  /* Input colors */
+  --input: 23 23 23;
+  --input-border: 55 65 81; /* gray-700 */
+
+  /* Shadow values - more subtle in dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+/* ============================================
+   Tailwind Theme Integration
+   ============================================ */
+
+@theme inline {
+  /* Colors using CSS variables */
+  --color-background: rgb(var(--background));
+  --color-background-secondary: rgb(var(--background-secondary));
+  --color-foreground: rgb(var(--foreground));
+  --color-foreground-secondary: rgb(var(--foreground-secondary));
+  --color-foreground-muted: rgb(var(--foreground-muted));
+
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+
+  --color-border: rgb(var(--border));
+  --color-border-secondary: rgb(var(--border-secondary));
+
+  --color-success: rgb(var(--success));
+  --color-warning: rgb(var(--warning));
+  --color-danger: rgb(var(--danger));
+
+  --color-card: rgb(var(--card));
+  --color-card-border: rgb(var(--card-border));
+
+  --color-input: rgb(var(--input));
+  --color-input-border: rgb(var(--input-border));
+
+  /* Typography */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-heading:
+    var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.6;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* ============================================
+   Typography Utilities
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    var(--font-space-grotesk),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: rgb(var(--foreground));
+}
+
+/* ============================================
+   Smooth Transitions
+   ============================================ */
+
+a,
+button {
+  transition: all 0.2s ease;
+}
+
+/* ============================================
+   Focus Styles for Accessibility
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Selection Styles
+   ============================================ */
+
+::selection {
+  background-color: rgb(var(--primary) / 0.2);
+  color: rgb(var(--foreground));
+}
+
+/* ============================================
+   Brand-Specific Utilities
+   ============================================ */
+
+.brand-gradient {
+  background: linear-gradient(135deg, $brand-primary 0%, $brand-accent 100%);
+}
+
+.brand-text-gradient {
+  background: linear-gradient(135deg, $brand-primary 0%, $brand-accent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-container {
+  img {
+    transition:
+      transform 0.3s ease,
+      filter 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Dark mode logo filter (if needed for inverting colors)
+.dark {
+  .logo-light-mode {
+    filter: invert(1) brightness(1.1);
+  }
+}

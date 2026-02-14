@@ -31,6 +31,7 @@ import { ThemeToggle } from "@/components/layout";
 import {
   NavLogo,
   NavLink,
+  NavDropdown,
   MobileMenu,
   MobileMenuButton,
 } from "@/components/layout/navbar";
@@ -46,7 +47,26 @@ export function Navigation() {
   const navLinks: NavLinkItem[] = [
     { href: "/", label: "Home", color: "primary" },
     { href: "/about", label: "About", color: "accent" },
-    { href: "/services", label: "Services", color: "success" },
+    {
+      label: "Services",
+      color: "success",
+      dropdown: [
+        { href: "/services", label: "All Services" },
+        {
+          href: "/services/business-landing-pages",
+          label: "Business Landing Pages",
+        },
+        { href: "/services/e-commerce", label: "E-commerce Websites" },
+        {
+          href: "/services/content-management-systems",
+          label: "Content Management Systems",
+        },
+        {
+          href: "/services/maintenance-support",
+          label: "Maintenance & Support",
+        },
+      ],
+    },
     { href: "/portfolio", label: "Portfolio", color: "warning" },
     { href: "/blog", label: "Blog", color: "danger" },
     { href: "/contact", label: "Contact", color: "primary" },
@@ -78,15 +98,30 @@ export function Navigation() {
 
             {/* Navigation Links - Desktop */}
             <div className="hidden items-center gap-8 md:flex">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  isActive={pathname === link.href}
-                  color={link.color}
-                />
-              ))}
+              {navLinks.map((link) => {
+                if (link.dropdown) {
+                  // Render dropdown for items with dropdown property
+                  return (
+                    <NavDropdown
+                      key={link.label}
+                      label={link.label}
+                      items={link.dropdown}
+                      isActive={pathname.startsWith("/services")}
+                      color={link.color}
+                    />
+                  );
+                }
+                // Regular link
+                return (
+                  <NavLink
+                    key={link.href}
+                    href={link.href!}
+                    label={link.label}
+                    isActive={pathname === link.href}
+                    color={link.color}
+                  />
+                );
+              })}
             </div>
 
             {/* Mobile Menu Button + Theme Toggle */}

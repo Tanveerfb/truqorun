@@ -103,7 +103,10 @@ truqorun/
 │   └── page.tsx             # Homepage
 ├── components/              # Reusable components
 │   ├── ui/                  # UI components (Button, Card, etc.)
-│   ├── layout/              # Layout components (ThemeProvider, etc.)
+│   ├── layout/              # Layout components
+│   │   ├── navbar/          # Modular navigation components
+│   │   ├── Navigation.tsx   # Main navigation component
+│   │   └── ThemeProvider.tsx
 │   └── features/            # Feature-specific components
 ├── content/                 # Content and copywriting
 ├── public/                  # Static assets
@@ -156,6 +159,14 @@ Users can toggle between modes using the theme switcher in the navigation.
 
 - **ThemeProvider** - Theme context and management
 - **ThemeToggle** - Theme switching button
+- **Navigation** - Enhanced modular navigation bar
+  - **NavLogo** - Brand/logo component with placeholder
+  - **NavLink** - Reusable link with active state highlighting
+  - **MobileMenu** - Responsive mobile menu with animations
+  - **MobileMenuButton** - Hamburger/close toggle button
+- **Header** - Sticky header wrapper
+- **Footer** - Site-wide footer with contact info
+- **Main** - Semantic main content wrapper
 
 All components include:
 - ✅ TypeScript types
@@ -163,6 +174,27 @@ All components include:
 - ✅ Accessibility features
 - ✅ Dark mode support
 - ✅ Responsive design
+
+### Navigation Module
+
+The Navigation component has been enhanced with a modular architecture for better maintainability and reusability:
+
+**Features:**
+- 🎯 **Active State Highlighting** - Visual indication of current page using Next.js pathname detection
+- 📱 **Mobile Responsive** - Slide-down menu with smooth animations for small screens
+- ♿ **Fully Accessible** - WCAG 2.1 AA compliant with skip links, ARIA labels, and keyboard navigation
+- 🌙 **Dark Mode Compatible** - Seamless theme switching with proper contrast ratios
+- 🧩 **Modular Components** - Separate components for logo, links, mobile menu, and buttons
+- 🎨 **Customizable** - Easy to update links, styling, and branding
+
+**Components:**
+- `Navigation` - Main orchestrator component
+- `NavLogo` - Brand/logo display ([PLACEHOLDER] for actual logo image)
+- `NavLink` - Individual navigation link with active state
+- `MobileMenu` - Mobile navigation panel
+- `MobileMenuButton` - Hamburger/close toggle
+
+For detailed documentation, see [`components/layout/navbar/README.md`](components/layout/navbar/README.md).
 
 ---
 

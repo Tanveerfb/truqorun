@@ -18,3 +18,9 @@ export type { CardProps } from './Card';
 
 export { Container } from './Container';
 export type { ContainerProps } from './Container';
+
+export { Heading, Paragraph, Lead } from './Typography';
+export type { HeadingProps, ParagraphProps, LeadProps } from './Typography';
+
+export { ProjectCard } from './ProjectCard';
+export type { ProjectCardProps } from './ProjectCard';

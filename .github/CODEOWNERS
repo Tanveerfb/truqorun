@@ -1,0 +1,41 @@
+# Code Owners
+# 
+# This file defines individuals or teams responsible for code in this repository.
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own.
+#
+# More info: https://help.github.com/articles/about-code-owners/
+
+# Default owners for everything in the repo
+# These owners will be requested for review when someone opens a pull request
+*                           @Tanveerfb
+
+# Documentation
+*.md                        @Tanveerfb
+/content/                   @Tanveerfb
+
+# GitHub-specific files
+/.github/                   @Tanveerfb
+
+# Components
+/components/                @Tanveerfb
+/components/ui/             @Tanveerfb
+/components/layout/         @Tanveerfb
+
+# App directory (pages and layouts)
+/app/                       @Tanveerfb
+
+# Configuration files
+*.config.*                  @Tanveerfb
+tsconfig.json              @Tanveerfb
+package.json               @Tanveerfb
+
+# Styles
+*.css                       @Tanveerfb
+/app/globals.css           @Tanveerfb
+
+# [PLACEHOLDER] Add team-specific ownership as the team grows
+# Example:
+# /components/features/auth/  @auth-team
+# /components/ui/             @design-team
+# /app/api/                   @backend-team

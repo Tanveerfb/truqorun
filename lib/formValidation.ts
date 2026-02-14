@@ -81,22 +81,30 @@ export const contactFormSchema = z.object({
 
 /**
  * Validate a single field
+ * Validates by creating a partial object and checking just that field
  */
 export function validateField(
   fieldName: keyof ContactFormData,
   value: string | string[]
 ): string | null {
   try {
-    const fieldSchema = contactFormSchema.shape[fieldName as keyof typeof contactFormSchema.shape];
-    if (!fieldSchema) return null;
+    // Create a test object with just this field
+    // Use the full schema to validate, but only check this field's errors
+    const testData: Partial<ContactFormData> = { [fieldName]: value };
+    const result = contactFormSchema.partial().safeParse(testData);
     
-    fieldSchema.parse(value);
-    return null;
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      const issues = error.issues || [];
-      return issues[0]?.message || 'Invalid value';
+    if (!result.success) {
+      const issues = result.error.issues || [];
+      // Find error for this specific field
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const fieldError = issues.find((issue: any) => 
+        issue.path && issue.path[0] === fieldName
+      );
+      return fieldError?.message || 'Invalid value';
     }
+    
+    return null;
+  } catch {
     return 'Validation error';
   }
 }
@@ -112,7 +120,8 @@ export function validateForm(formData: Partial<ContactFormData>): FormErrors {
   } catch (error) {
     if (error instanceof z.ZodError) {
       const issues = error.issues || [];
-      issues.forEach((err: { path?: (string | number)[]; message?: string }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      issues.forEach((err: any) => {
         const path = (err.path || []).join('.');
         errors[path] = err.message || 'Invalid value';
       });
@@ -143,7 +152,7 @@ export function validateStep(
   const fieldsToValidate = stepFields[step] || [];
   
   fieldsToValidate.forEach((fieldName) => {
-    const error = validateField(fieldName, formData[fieldName], formData);
+    const error = validateField(fieldName, formData[fieldName] as string | string[]);
     if (error) {
       errors[fieldName] = error;
     }

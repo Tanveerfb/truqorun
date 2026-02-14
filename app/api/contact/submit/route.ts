@@ -69,25 +69,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Insert into Supabase
-    type SubmissionInsert = {
-      project_type: string;
-      selected_features: string[];
-      additional_features: string | null;
-      budget: string;
-      timeline: string;
-      project_brief: string;
-      company_name: string | null;
-      company_website: string | null;
-      reference_links: string | null;
-      full_name: string;
-      email: string;
-      phone: string | null;
-      best_time_to_contact: string;
-      status: string;
-      submitted_at: string;
-    };
-
-    const { data, error } = await supabaseAdmin
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = await (supabaseAdmin as any)
       .from('form_submissions')
       .insert({
         project_type: formData.projectType as string,
@@ -105,7 +88,7 @@ export async function POST(request: NextRequest) {
         best_time_to_contact: formData.bestTimeToContact as string,
         status: 'new',
         submitted_at: new Date().toISOString(),
-      } as SubmissionInsert)
+      })
       .select('id')
       .single();
 

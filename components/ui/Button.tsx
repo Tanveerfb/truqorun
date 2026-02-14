@@ -1,28 +1,28 @@
 /**
  * Button Component
- * 
+ *
  * A reusable button component with support for different variants, sizes, and loading states.
  * Supports light and dark mode theming out of the box.
- * 
+ *
  * @example
  * ```tsx
  * <Button variant="primary" size="md" onClick={() => console.log('Clicked')}>
  *   Click me
  * </Button>
- * 
+ *
  * <Button variant="outline" size="lg" loading>
  *   Loading...
  * </Button>
  * ```
  */
 
-import React from 'react';
+import React from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style variant of the button */
-  variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
+  variant?: "primary" | "secondary" | "danger" | "outline" | "ghost";
   /** Size of the button */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   /** Button content */
   children: React.ReactNode;
   /** Loading state - shows spinner and disables button */
@@ -33,34 +33,40 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * Button component for user interactions
  */
 export const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
+  variant = "primary",
+  size = "md",
   children,
-  className = '',
+  className = "",
   loading = false,
   disabled,
   ...props
 }) => {
-  const baseStyles = 'rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2';
-  
+  const baseStyles =
+    "rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2";
+
   const variantStyles = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600 hover:shadow-lg',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 dark:bg-red-500 dark:hover:bg-red-600 hover:shadow-lg',
-    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-950',
-    ghost: 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500 dark:text-gray-300 dark:hover:bg-gray-800',
+    primary:
+      "bg-primary text-primary-foreground hover:opacity-90 focus:ring-primary hover:shadow-lg",
+    secondary:
+      "bg-background-secondary text-foreground hover:bg-border focus:ring-border border border-border",
+    danger:
+      "bg-danger text-white hover:opacity-90 focus:ring-danger hover:shadow-lg",
+    outline:
+      "border-2 border-primary text-primary hover:bg-primary/10 focus:ring-primary",
+    ghost:
+      "text-foreground-secondary hover:bg-background-secondary focus:ring-border",
   };
-  
+
   const sizeStyles = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
   };
 
   const spinnerSizes = {
-    sm: 'h-4 w-4',
-    md: 'h-5 w-5',
-    lg: 'h-6 w-6',
+    sm: "h-4 w-4",
+    md: "h-5 w-5",
+    lg: "h-6 w-6",
   };
 
   return (

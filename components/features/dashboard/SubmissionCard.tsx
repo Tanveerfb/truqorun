@@ -1,62 +1,72 @@
 /**
  * Submission Card Component
- * 
+ *
  * Displays a single form submission with expandable details.
- * 
+ *
  * [EXTENSIBILITY]: Easy to add more fields or actions
  * [PLACEHOLDER]: Add status update functionality, notes editor
- * 
+ *
  * @module components/features/dashboard/SubmissionCard
  */
 
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import type { FormSubmission } from '@/types/form';
-import { PROJECT_TYPES, BUDGET_OPTIONS, TIMELINE_OPTIONS } from '@/lib/formConfig';
+import React, { useState } from "react";
+import type { FormSubmission } from "@/types/form";
+import {
+  PROJECT_TYPES,
+  BUDGET_OPTIONS,
+  TIMELINE_OPTIONS,
+} from "@/lib/formConfig";
 
 interface SubmissionCardProps {
   submission: FormSubmission;
 }
 
-export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
+export const SubmissionCard: React.FC<SubmissionCardProps> = ({
+  submission,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const projectTypeLabel = PROJECT_TYPES.find(
-    (pt) => pt.value === submission.projectType
-  )?.label || submission.projectType;
+  const projectTypeLabel =
+    PROJECT_TYPES.find((pt) => pt.value === submission.projectType)?.label ||
+    submission.projectType;
 
-  const budgetLabel = BUDGET_OPTIONS.find(
-    (b) => b.value === submission.budget
-  )?.label || submission.budget;
+  const budgetLabel =
+    BUDGET_OPTIONS.find((b) => b.value === submission.budget)?.label ||
+    submission.budget;
 
-  const timelineLabel = TIMELINE_OPTIONS.find(
-    (t) => t.value === submission.timeline
-  )?.label || submission.timeline;
+  const timelineLabel =
+    TIMELINE_OPTIONS.find((t) => t.value === submission.timeline)?.label ||
+    submission.timeline;
 
   const statusColors = {
-    new: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
-    contacted: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
-    'in-progress': 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
-    completed: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
-    archived: 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300',
+    new: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+    contacted:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+    "in-progress":
+      "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+    completed:
+      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+    archived:
+      "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300",
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   return (
-    <div className="rounded-lg border border-input-border bg-white dark:bg-gray-900">
+    <div className="rounded-lg border border-input-border bg-card">
       {/* Card Header */}
       <div
-        className="cursor-pointer p-6 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+        className="cursor-pointer p-6 hover:bg-background-secondary"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-start justify-between gap-4">
@@ -70,7 +80,7 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) =>
                   statusColors[submission.status]
                 }`}
               >
-                {submission.status.replace('-', ' ').toUpperCase()}
+                {submission.status.replace("-", " ").toUpperCase()}
               </span>
             </div>
             <div className="mt-2 space-y-1 text-sm text-foreground-secondary">
@@ -91,7 +101,7 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) =>
         {/* Expand/Collapse Indicator */}
         <div className="mt-4 flex items-center justify-center">
           <button className="text-sm text-primary hover:text-primary/80">
-            {isExpanded ? '▲ Show Less' : '▼ Show More'}
+            {isExpanded ? "▲ Show Less" : "▼ Show More"}
           </button>
         </div>
       </div>
@@ -122,7 +132,7 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) =>
                     className="flex items-center gap-2 text-sm text-foreground-secondary"
                   >
                     <span className="text-primary">✓</span>
-                    {feature.replace(/-/g, ' ')}
+                    {feature.replace(/-/g, " ")}
                   </li>
                 ))}
               </ul>
@@ -150,13 +160,13 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) =>
               <div className="space-y-1 text-sm text-foreground-secondary">
                 {submission.companyName && (
                   <p>
-                    <span className="font-medium">Company:</span>{' '}
+                    <span className="font-medium">Company:</span>{" "}
                     {submission.companyName}
                   </p>
                 )}
                 {submission.companyWebsite && (
                   <p>
-                    <span className="font-medium">Website:</span>{' '}
+                    <span className="font-medium">Website:</span>{" "}
                     <a
                       href={submission.companyWebsite}
                       target="_blank"
@@ -189,9 +199,9 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) =>
               Contact Preferences
             </h4>
             <p className="text-sm text-foreground-secondary">
-              Best time to contact:{' '}
+              Best time to contact:{" "}
               <span className="font-medium">
-                {submission.bestTimeToContact.replace('-', ' ')}
+                {submission.bestTimeToContact.replace("-", " ")}
               </span>
             </p>
           </div>

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Error Boundary Component
- * 
+ *
  * Catches JavaScript errors anywhere in the component tree and displays a fallback UI.
  * Logs error information for debugging purposes.
- * 
+ *
  * @example
  * ```tsx
  * <ErrorBoundary>
@@ -14,7 +14,7 @@
  * ```
  */
 
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -43,7 +43,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error details for debugging
-    console.error('Error caught by boundary:', error, errorInfo);
+    console.error("Error caught by boundary:", error, errorInfo);
   }
 
   render() {
@@ -56,27 +56,28 @@ export class ErrorBoundary extends Component<Props, State> {
       // Default fallback UI
       return (
         <div className="min-h-screen flex items-center justify-center bg-background p-4">
-          <div className="max-w-md w-full rounded-lg border border-red-200 bg-red-50 p-8 text-center dark:border-red-800 dark:bg-red-900/20">
+          <div className="max-w-md w-full rounded-lg border border-danger/30 bg-danger/10 p-8 text-center">
             <div className="mb-4 text-4xl">⚠️</div>
-            <h2 className="mb-2 text-2xl font-semibold text-red-900 dark:text-red-100">
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">
               Something went wrong
             </h2>
-            <p className="mb-4 text-red-800 dark:text-red-200">
-              We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
+            <p className="mb-4 text-foreground-secondary">
+              We&apos;re sorry, but something unexpected happened. Please try
+              refreshing the page.
             </p>
             {this.state.error && (
               <details className="mb-4 text-left">
-                <summary className="cursor-pointer text-sm text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100">
+                <summary className="cursor-pointer text-sm text-foreground-secondary hover:text-foreground">
                   Technical details
                 </summary>
-                <pre className="mt-2 text-xs text-red-600 dark:text-red-400 overflow-auto p-2 bg-red-100 dark:bg-red-900/40 rounded">
+                <pre className="mt-2 text-xs text-foreground-muted overflow-auto p-2 bg-background-secondary rounded">
                   {this.state.error.toString()}
                 </pre>
               </details>
             )}
             <button
               onClick={() => window.location.reload()}
-              className="rounded-lg bg-red-600 px-6 py-2 text-white transition-colors hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600"
+              className="rounded-lg bg-danger px-6 py-2 text-white transition-colors hover:opacity-90"
             >
               Refresh Page
             </button>

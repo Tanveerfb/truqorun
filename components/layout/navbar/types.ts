@@ -1,9 +1,9 @@
 /**
  * Navbar Component Types
- * 
+ *
  * Type definitions for navigation components.
  * Provides type safety for navigation items and component props.
- * 
+ *
  * @module components/layout/navbar/types
  */
 
@@ -19,6 +19,8 @@ export interface NavLinkItem {
   icon?: React.ComponentType<{ className?: string }>;
   /** Whether link opens in new tab */
   external?: boolean;
+  /** Background color on hover/active */
+  color?: "primary" | "accent" | "success" | "warning" | "danger";
 }
 
 /**
@@ -35,6 +37,8 @@ export interface NavLinkProps {
   onClick?: () => void;
   /** Additional CSS classes */
   className?: string;
+  /** Background color on hover/active */
+  color?: "primary" | "accent" | "success" | "warning" | "danger";
 }
 
 /**

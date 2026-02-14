@@ -1,21 +1,21 @@
 /**
  * Dashboard Header Component
- * 
+ *
  * Header for the dashboard with navigation and actions.
- * 
+ *
  * [PLACEHOLDER]: Add logout functionality and user menu
- * 
+ *
  * @module components/features/dashboard/DashboardHeader
  */
 
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 export const DashboardHeader: React.FC = () => {
   return (
-    <header className="border-b border-input-border bg-white dark:bg-gray-900">
+    <header className="border-b border-input-border bg-card">
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">

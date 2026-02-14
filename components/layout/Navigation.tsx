@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 /**
  * Navigation Component
- * 
+ *
  * Enhanced responsive site navigation bar with modular components.
- * 
+ *
  * Features:
  * - Modular component architecture (NavLogo, NavLink, MobileMenu, etc.)
  * - Active page highlighting with pathname detection
@@ -14,21 +14,26 @@
  * - Full accessibility (skip link, ARIA labels, keyboard navigation)
  * - Dark mode compatible throughout
  * - Smooth transitions and hover effects
- * 
+ *
  * [PLACEHOLDER]: Update navLinks array with final Truqorun page links
  * [PLACEHOLDER]: Replace NavLogo text with actual logo image when available
- * 
+ *
  * @example
  * ```tsx
  * <Navigation />
  * ```
- * 
+ *
  * @module components/layout/Navigation
  */
 
 import { Container } from "@/components/ui";
 import { ThemeToggle } from "@/components/layout";
-import { NavLogo, NavLink, MobileMenu, MobileMenuButton } from "@/components/layout/navbar";
+import {
+  NavLogo,
+  NavLink,
+  MobileMenu,
+  MobileMenuButton,
+} from "@/components/layout/navbar";
 import type { NavLinkItem } from "@/components/layout/navbar";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -39,12 +44,12 @@ export function Navigation() {
 
   // [PLACEHOLDER]: Update these links based on final Truqorun site structure
   const navLinks: NavLinkItem[] = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: "/", label: "Home", color: "primary" },
+    { href: "/about", label: "About", color: "accent" },
+    { href: "/services", label: "Services", color: "success" },
+    { href: "/portfolio", label: "Portfolio", color: "warning" },
+    { href: "/blog", label: "Blog", color: "danger" },
+    { href: "/contact", label: "Contact", color: "primary" },
   ];
 
   const toggleMobileMenu = () => {
@@ -79,6 +84,7 @@ export function Navigation() {
                   href={link.href}
                   label={link.label}
                   isActive={pathname === link.href}
+                  color={link.color}
                 />
               ))}
             </div>

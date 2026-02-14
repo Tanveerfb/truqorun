@@ -1,43 +1,43 @@
-'use client';
+"use client";
 
 /**
  * ThemeToggle Component
- * 
+ *
  * A button component that allows users to switch between light, dark, and system themes.
  * Features smooth transitions and accessible icons.
- * 
+ *
  * @example
  * ```tsx
  * <ThemeToggle />
  * ```
- * 
+ *
  * [PLACEHOLDER]: Add animated icon transitions and custom styling options
  */
 
-import React from 'react';
-import { useTheme } from './ThemeProvider';
+import React from "react";
+import { useTheme } from "./ThemeProvider";
 
 /**
  * Theme toggle button component
- * 
+ *
  * Cycles through light -> dark -> system themes.
  * Shows appropriate icon for current theme.
  */
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, mounted } = useTheme();
 
   const cycleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('system');
+    if (theme === "light") {
+      setTheme("dark");
+    } else if (theme === "dark") {
+      setTheme("system");
     } else {
-      setTheme('light');
+      setTheme("light");
     }
   };
 
   const getIcon = () => {
-    if (theme === 'light') {
+    if (theme === "light") {
       return (
         <svg
           className="h-5 w-5"
@@ -54,7 +54,7 @@ export function ThemeToggle() {
           />
         </svg>
       );
-    } else if (theme === 'dark') {
+    } else if (theme === "dark") {
       return (
         <svg
           className="h-5 w-5"
@@ -92,15 +92,20 @@ export function ThemeToggle() {
   };
 
   const getLabel = () => {
-    if (theme === 'light') return 'Switch to dark mode';
-    if (theme === 'dark') return 'Switch to system theme';
-    return 'Switch to light mode';
+    if (theme === "light") return "Switch to dark mode";
+    if (theme === "dark") return "Switch to system theme";
+    return "Switch to light mode";
   };
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return <div className="h-9 w-9" aria-hidden="true" />;
+  }
 
   return (
     <button
       onClick={cycleTheme}
-      className="rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:text-gray-200 dark:hover:bg-gray-800"
+      className="rounded-lg p-2 text-gray-900 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:text-gray-200 dark:hover:bg-gray-800"
       aria-label={getLabel()}
       title={getLabel()}
     >

@@ -1,9 +1,9 @@
 /**
  * Section Component
- * 
+ *
  * Semantic section wrapper for page sections with consistent spacing.
  * Supports different spacing variants and background styles.
- * 
+ *
  * @example
  * ```tsx
  * <Section spacing="lg" background="secondary">
@@ -15,15 +15,15 @@
  * ```
  */
 
-import React from 'react';
+import React from "react";
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   /** Section content */
   children: React.ReactNode;
   /** Spacing variant for vertical padding */
-  spacing?: 'sm' | 'md' | 'lg' | 'xl';
+  spacing?: "sm" | "md" | "lg" | "xl";
   /** Background style variant */
-  background?: 'default' | 'secondary' | 'accent';
+  background?: "default" | "secondary" | "accent";
   /** Additional CSS classes */
   className?: string;
 }
@@ -33,22 +33,22 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
  */
 export const Section: React.FC<SectionProps> = ({
   children,
-  spacing = 'lg',
-  background = 'default',
-  className = '',
+  spacing = "lg",
+  background = "default",
+  className = "",
   ...props
 }) => {
   const spacingStyles = {
-    sm: 'py-8',
-    md: 'py-12',
-    lg: 'py-20',
-    xl: 'py-28',
+    sm: "py-8",
+    md: "py-12",
+    lg: "py-20",
+    xl: "py-28",
   };
 
   const backgroundStyles = {
-    default: 'bg-background',
-    secondary: 'bg-background-secondary border-t border-border',
-    accent: 'bg-gradient-to-br from-primary/5 to-accent/5 border-t border-border',
+    default: "bg-background",
+    secondary: "bg-background-secondary border-t border-border",
+    accent: "bg-background-secondary border-t border-border",
   };
 
   return (

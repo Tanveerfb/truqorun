@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * MobileMenu Component
- * 
+ *
  * Mobile-responsive navigation menu with slide-down animation.
  * Displays navigation links in a vertical layout for small screens.
- * 
+ *
  * Features:
  * - Smooth slide-down/up animations
  * - Active link highlighting
@@ -13,33 +13,33 @@
  * - Keyboard accessible
  * - Dark mode compatible
  * - Touch-friendly spacing
- * 
+ *
  * @example
  * ```tsx
- * <MobileMenu 
+ * <MobileMenu
  *   isOpen={isMobileMenuOpen}
  *   navLinks={navLinks}
  *   activePath={pathname}
  *   onClose={closeMobileMenu}
  * />
  * ```
- * 
+ *
  * @module components/layout/navbar/MobileMenu
  */
 
-import { NavLink } from './NavLink';
-import { MobileMenuProps } from './types';
+import { NavLink } from "./NavLink";
+import { MobileMenuProps } from "./types";
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({
   isOpen,
   navLinks,
-  activePath = '',
+  activePath = "",
   onClose,
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       id="mobile-menu"
       className="md:hidden py-4 border-t border-border animate-in slide-in-from-top-2 duration-200"
       role="navigation"
@@ -54,6 +54,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             isActive={activePath === link.href}
             onClick={onClose}
             className="py-2"
+            color={link.color}
           />
         ))}
       </div>

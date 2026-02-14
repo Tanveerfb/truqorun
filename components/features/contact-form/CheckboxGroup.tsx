@@ -1,15 +1,15 @@
 /**
  * Checkbox Group Component
- * 
+ *
  * A reusable checkbox group component for selecting multiple options.
  * Used in the contact form for feature selection.
- * 
+ *
  * @module components/features/contact-form/CheckboxGroup
  */
 
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 export interface CheckboxOption {
   id: string;
@@ -50,10 +50,10 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             flex items-start gap-3 rounded-lg border p-4 cursor-pointer transition-all
             ${
               selectedValues.includes(option.id)
-                ? 'border-primary bg-primary/5'
-                : 'border-input-border bg-input hover:border-primary/50'
+                ? "border-primary bg-primary/5"
+                : "border-input-border bg-input hover:border-primary/50"
             }
-            ${error ? 'border-red-500' : ''}
+            ${error ? "border-red-500" : ""}
           `}
         >
           <input
@@ -61,12 +61,16 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             checked={selectedValues.includes(option.id)}
             onChange={() => handleToggle(option.id)}
             className="mt-1 h-4 w-4 rounded text-primary focus:ring-primary"
-            aria-describedby={option.description ? `checkbox-${option.id}-description` : undefined}
+            aria-describedby={
+              option.description
+                ? `checkbox-${option.id}-description`
+                : undefined
+            }
           />
           <div className="flex-1">
             <div className="font-medium text-foreground">{option.label}</div>
             {option.description && (
-              <div 
+              <div
                 id={`checkbox-${option.id}-description`}
                 className="mt-1 text-sm text-foreground-secondary"
               >
@@ -77,7 +81,9 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         </label>
       ))}
       {error && (
-        <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>
+        <p className="text-sm text-danger" role="alert">
+          {error}
+        </p>
       )}
     </div>
   );

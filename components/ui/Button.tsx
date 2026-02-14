@@ -57,6 +57,12 @@ export const Button: React.FC<ButtonProps> = ({
     lg: 'px-6 py-3 text-lg',
   };
 
+  const spinnerSizes = {
+    sm: 'h-4 w-4',
+    md: 'h-5 w-5',
+    lg: 'h-6 w-6',
+  };
+
   return (
     <button
       className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
@@ -65,7 +71,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {loading && (
         <svg
-          className="animate-spin h-5 w-5"
+          className={`animate-spin ${spinnerSizes[size]}`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

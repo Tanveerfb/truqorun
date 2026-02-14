@@ -30,21 +30,15 @@ const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
  */
 export const contactFormSchema = z.object({
   // Step 1
-  projectType: z.enum(['ecommerce', 'landing-page', 'cms', 'portfolio', 'custom', 'not-sure'], {
-    required_error: 'Please select a project type',
-  }),
+  projectType: z.enum(['ecommerce', 'landing-page', 'cms', 'portfolio', 'custom', 'not-sure']),
   
   // Step 2
   selectedFeatures: z.array(z.string()).min(0),
   additionalFeatures: z.string().optional(),
   
   // Step 3
-  budget: z.enum(['1k-2k', '2k-4k', '4k-7k', '7k+', 'not-sure'], {
-    required_error: 'Please select a budget range',
-  }),
-  timeline: z.enum(['asap', '1-2-weeks', '2-4-weeks', '1-2-months', '2-3-months', 'flexible'], {
-    required_error: 'Please select a timeline',
-  }),
+  budget: z.enum(['1k-2k', '2k-4k', '4k-7k', '7k+', 'not-sure']),
+  timeline: z.enum(['asap', '1-2-weeks', '2-4-weeks', '1-2-months', '2-3-months', 'flexible']),
   projectBrief: z
     .string()
     .min(20, 'Please provide at least 20 characters describing your project')
@@ -82,9 +76,7 @@ export const contactFormSchema = z.object({
     .max(20, 'Phone number must be less than 20 characters')
     .optional()
     .or(z.literal('')),
-  bestTimeToContact: z.enum(['morning', 'afternoon', 'evening', 'anytime'], {
-    required_error: 'Please select a preferred contact time',
-  }),
+  bestTimeToContact: z.enum(['morning', 'afternoon', 'evening', 'anytime']),
 });
 
 /**
@@ -103,7 +95,8 @@ export function validateField(
     return null;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return error.errors[0]?.message || 'Invalid value';
+      const issues = error.issues || [];
+      return issues[0]?.message || 'Invalid value';
     }
     return 'Validation error';
   }
@@ -119,9 +112,10 @@ export function validateForm(formData: Partial<ContactFormData>): FormErrors {
     contactFormSchema.parse(formData);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      error.errors.forEach((err) => {
-        const path = err.path.join('.');
-        errors[path] = err.message;
+      const issues = error.issues || [];
+      issues.forEach((err: any) => {
+        const path = (err.path || []).join('.');
+        errors[path] = err.message || 'Invalid value';
       });
     }
   }

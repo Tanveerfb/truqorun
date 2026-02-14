@@ -31,11 +31,12 @@ export async function POST(request: NextRequest) {
     // Validate form data
     const validationResult = contactFormSchema.safeParse(body);
     if (!validationResult.success) {
+      const issues = validationResult.error.issues || [];
       return NextResponse.json(
         {
           success: false,
           error: 'Invalid form data',
-          details: validationResult.error.errors,
+          details: issues,
         },
         { status: 400 }
       );
@@ -71,11 +72,11 @@ export async function POST(request: NextRequest) {
     const { data, error } = await supabaseAdmin
       .from('form_submissions')
       .insert({
-        project_type: formData.projectType,
+        project_type: formData.projectType as string,
         selected_features: formData.selectedFeatures,
         additional_features: formData.additionalFeatures || null,
-        budget: formData.budget,
-        timeline: formData.timeline,
+        budget: formData.budget as string,
+        timeline: formData.timeline as string,
         project_brief: formData.projectBrief,
         company_name: formData.companyName || null,
         company_website: formData.companyWebsite || null,
@@ -83,10 +84,10 @@ export async function POST(request: NextRequest) {
         full_name: formData.fullName,
         email: formData.email,
         phone: formData.phone || null,
-        best_time_to_contact: formData.bestTimeToContact,
+        best_time_to_contact: formData.bestTimeToContact as string,
         status: 'new',
         submitted_at: new Date().toISOString(),
-      })
+      } as any)
       .select('id')
       .single();
 
@@ -101,10 +102,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const submissionId = (data as any)?.id || 'unknown';
+
     // Send email notification
     // [PLACEHOLDER]: Implement email notification
     try {
-      await sendEmailNotification(formData, data.id);
+      await sendEmailNotification(formData, submissionId);
     } catch (emailError) {
       // Log error but don't fail the submission
       console.error('[API] Email notification error:', emailError);
@@ -113,7 +116,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Form submitted successfully',
-      submissionId: data.id,
+      submissionId: submissionId,
     });
   } catch (error) {
     console.error('[API] Unexpected error:', error);

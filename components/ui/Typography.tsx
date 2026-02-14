@@ -114,4 +114,6 @@ export const Lead: React.FC<LeadProps> = ({
   );
 };
 
-export default { Heading, Paragraph, Lead };
+const Typography = { Heading, Paragraph, Lead };
+
+export default Typography;

@@ -52,6 +52,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* [PLACEHOLDER DESIGN]: Image placeholder - replace with actual project images */}
       <div className="mb-4 h-48 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
         {imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img src={imageUrl} alt={title} className="h-full w-full object-cover rounded-lg" />
         ) : (
           <span className="text-sm text-foreground-muted">Project Image</span>

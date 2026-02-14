@@ -14,7 +14,7 @@ import { Container, Section, Heading, Paragraph } from '@/components';
 import { Header, Footer, Main, Navigation } from '@/components/layout';
 
 // [PLACEHOLDER]: This would typically fetch data from CMS or file system
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Blog Post - Truqorun`,
     description: 'Read the full article on Truqorun blog.',

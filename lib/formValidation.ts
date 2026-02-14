@@ -21,9 +21,10 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^[\d\s\-\+\(\)]+$/;
 
 /**
- * URL validation regex (simplified)
+ * URL validation regex (simplified, ReDoS-safe)
+ * Matches common URL patterns without catastrophic backtracking
  */
-const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+const urlRegex = /^(https?:\/\/)?([a-z\d-]+\.)+[a-z]{2,}(\/[^\s]*)?$/i;
 
 /**
  * Zod schema for contact form validation

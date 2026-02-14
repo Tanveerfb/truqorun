@@ -34,7 +34,7 @@ export const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`md:hidden p-2 rounded-md hover:bg-surface-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${className}`}
+      className={`md:hidden p-2 rounded-md hover:bg-surface-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background ${className}`}
       aria-label={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
       aria-expanded={isOpen}
       aria-controls="mobile-menu"

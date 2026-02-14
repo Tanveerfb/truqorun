@@ -39,7 +39,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
   const activeStyles = isActive 
     ? 'text-primary' 
     : 'text-foreground-secondary hover:text-primary';
-  const focusStyles = 'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm';
+  const focusStyles = 'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background rounded-sm';
 
   return (
     <Link

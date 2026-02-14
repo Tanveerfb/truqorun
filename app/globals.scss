@@ -13,7 +13,6 @@
  * - Inter: Body text (--font-inter)
  */
 
-@use "sass:color";
 @import "tailwindcss";
 
 /* ============================================
@@ -21,27 +20,24 @@
    ============================================ */
 
 // Truqorun Brand Palette
-$brand-sky-aqua: #4ef9ff; // Sky Aqua - Primary
-$brand-light-green: #7cf9a8; // Light Green - Success
-$brand-turquoise: #a8ffa2; // Turquoise - Accent
+$brand-sky-aqua: #04d5f2; // Sky Aqua - Primary
+$brand-light-green: #8edc89; // Light Green - Success
+$brand-turquoise: #4cd5ca; // Turquoise - Accent
 
 // Color assignments
 $brand-primary: $brand-sky-aqua;
-$brand-primary-dark: color.adjust(
-  $brand-sky-aqua,
-  $lightness: 10%
-); // Lighter for dark mode
+$brand-primary-dark: lighten($brand-sky-aqua, 10%); // Lighter for dark mode
 $brand-accent: $brand-turquoise;
-$brand-accent-dark: color.adjust($brand-turquoise, $lightness: 8%);
+$brand-accent-dark: lighten($brand-turquoise, 8%);
 $brand-success: $brand-light-green;
-$brand-success-dark: color.adjust($brand-light-green, $lightness: 8%);
+$brand-success-dark: lighten($brand-light-green, 8%);
 $brand-warning: #fbbf24; // Amber-400
 $brand-danger: #ef4444; // Red-500
 $brand-danger-dark: #f87171; // Red-400 (for dark mode)
 
 // Background colors
-$bg-light: #fafafa;
-$bg-light-secondary: #f5f5f5;
+$bg-light: #ffffff;
+$bg-light-secondary: #f9fafb;
 $bg-dark: #0a0a0a;
 $bg-dark-secondary: #171717;
 

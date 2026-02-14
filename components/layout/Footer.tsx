@@ -203,6 +203,14 @@ export const Footer: React.FC<FooterProps> = ({ className = "", ...props }) => {
                     Report an Issue
                   </a>
                 </li>
+                <li>
+                  <Link
+                    href="/admin/login"
+                    className="text-foreground-muted hover:text-foreground-secondary transition-colors text-xs"
+                  >
+                    Admin
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

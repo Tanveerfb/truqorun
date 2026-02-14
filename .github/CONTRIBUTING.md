@@ -14,22 +14,22 @@ We want to make contributing to this project as easy and transparent as possible
 
 ## 📋 Table of Contents
 
-1. [Code of Conduct](#code-of-conduct)
-2. [Getting Started](#getting-started)
-3. [Development Workflow](#development-workflow)
-4. [Commit Message Guidelines](#commit-message-guidelines)
-5. [Pull Request Process](#pull-request-process)
-6. [Coding Standards](#coding-standards)
-7. [Project Structure](#project-structure)
-8. [Testing Guidelines](#testing-guidelines)
-9. [Documentation](#documentation)
-10. [Community](#community)
+1. [Code of Conduct](#-code-of-conduct)
+2. [Getting Started](#-getting-started)
+3. [Development Workflow](#-development-workflow)
+4. [Commit Message Guidelines](#-commit-message-guidelines)
+5. [Pull Request Process](#-pull-request-process)
+6. [Coding Standards](#-coding-standards)
+7. [Project Structure](#-project-structure)
+8. [Testing Guidelines](#-testing-guidelines)
+9. [Documentation](#-documentation)
+10. [Component Contribution Checklist](#-component-contribution-checklist)
 
 ---
 
 ## 📜 Code of Conduct
 
-This project and everyone participating in it is governed by respect, professionalism, and inclusivity. By participating, you are expected to uphold these values. Please report unacceptable behavior to truqorun@proton.me.
+This project and everyone participating in it is governed by respect, professionalism, and inclusivity. By participating, you are expected to uphold these values. Please report unacceptable behavior to <truqorun@proton.me>.
 
 ---
 
@@ -46,23 +46,32 @@ This project and everyone participating in it is governed by respect, profession
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/truqorun.git
    cd truqorun
    ```
+
 3. **Add upstream remote**:
+
    ```bash
    git remote add upstream https://github.com/Tanveerfb/truqorun.git
    ```
+
 4. **Install dependencies**:
+
    ```bash
    npm install
    ```
+
 5. **Copy environment variables**:
+
    ```bash
    cp .env.local.example .env.local
    ```
+
 6. **Start development server**:
+
    ```bash
    npm run dev
    ```

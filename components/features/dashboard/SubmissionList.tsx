@@ -1,16 +1,13 @@
 /**
  * Submission List Component
  *
- * Displays a list of form submissions with filtering and sorting.
+ * Displays a table of form submissions with filtering and sorting.
  *
  * Features:
  * - Load submissions from Supabase
  * - Filter by status
  * - Sort by date
- * - View submission details
- *
- * [EXTENSIBILITY]: Easy to add more filters and sorting options
- * [PLACEHOLDER]: Add pagination, export functionality
+ * - View submission details in modal
  *
  * @module components/features/dashboard/SubmissionList
  */
@@ -20,7 +17,12 @@
 import React, { useState, useEffect } from "react";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import type { FormSubmission } from "@/types/form";
-import { SubmissionCard } from "./SubmissionCard";
+import { SubmissionModal } from "./SubmissionModal";
+import {
+  PROJECT_TYPES,
+  BUDGET_OPTIONS,
+  TIMELINE_OPTIONS,
+} from "@/lib/formConfig";
 
 type StatusFilter =
   | "all"
@@ -39,6 +41,19 @@ export const SubmissionList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [selectedSubmission, setSelectedSubmission] =
+    useState<FormSubmission | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRowClick = (submission: FormSubmission) => {
+    setSelectedSubmission(submission);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedSubmission(null);
+  };
 
   /**
    * Load submissions from Supabase
@@ -75,6 +90,39 @@ export const SubmissionList: React.FC = () => {
     filterAndSortSubmissions();
   }, [filterAndSortSubmissions]);
 
+  const handleDelete = async (id: string) => {
+    // Remove from local state immediately for better UX
+    setSubmissions((prev) => prev.filter((sub) => sub.id !== id));
+    handleCloseModal();
+  };
+
+  /**
+   * Transform snake_case database fields to camelCase
+   */
+  const transformSubmission = (dbData: any): FormSubmission => {
+    return {
+      id: dbData.id,
+      projectType: dbData.project_type,
+      selectedFeatures: dbData.selected_features || [],
+      additionalFeatures: dbData.additional_features || "",
+      budget: dbData.budget,
+      timeline: dbData.timeline,
+      projectBrief: dbData.project_brief || "",
+      companyName: dbData.company_name || "",
+      companyWebsite: dbData.company_website || "",
+      referenceLinks: dbData.reference_links || "",
+      fullName: dbData.full_name,
+      email: dbData.email,
+      phone: dbData.phone || "",
+      bestTimeToContact: dbData.best_time_to_contact || "",
+      status: dbData.status,
+      notes: dbData.notes || "",
+      submittedAt: dbData.submitted_at,
+      updatedAt: dbData.updated_at || dbData.submitted_at,
+      createdAt: dbData.created_at || dbData.submitted_at,
+    };
+  };
+
   const loadSubmissions = async () => {
     // Check if Supabase is configured
     if (!isSupabaseConfigured() || !supabase) {
@@ -102,7 +150,9 @@ export const SubmissionList: React.FC = () => {
         throw fetchError;
       }
 
-      setSubmissions(data as FormSubmission[]);
+      // Transform snake_case to camelCase
+      const transformedData = data.map(transformSubmission);
+      setSubmissions(transformedData);
     } catch (err) {
       console.error("Error loading submissions:", err);
       setError("Failed to load submissions. Please try again.");
@@ -200,7 +250,7 @@ export const SubmissionList: React.FC = () => {
         Showing {filteredSubmissions.length} of {submissions.length} submissions
       </div>
 
-      {/* Submissions List */}
+      {/* Submissions Table */}
       {filteredSubmissions.length === 0 ? (
         <div className="rounded-lg border border-input-border bg-card p-12 text-center">
           <p className="text-foreground-secondary">
@@ -210,12 +260,120 @@ export const SubmissionList: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
-          {filteredSubmissions.map((submission) => (
-            <SubmissionCard key={submission.id} submission={submission} />
-          ))}
+        <div className="rounded-lg border border-input-border bg-card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-background-secondary border-b border-border">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Project Type
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Budget
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-foreground uppercase tracking-wider">
+                    Submitted
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {filteredSubmissions.map((submission) => {
+                  const projectTypeLabel =
+                    PROJECT_TYPES.find(
+                      (pt) => pt.value === submission.projectType,
+                    )?.label || submission.projectType;
+
+                  const budgetLabel =
+                    BUDGET_OPTIONS.find((b) => b.value === submission.budget)
+                      ?.label || submission.budget;
+
+                  const statusColors = {
+                    new: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+                    contacted:
+                      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+                    "in-progress":
+                      "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+                    completed:
+                      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+                    archived:
+                      "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300",
+                  };
+
+                  return (
+                    <tr
+                      key={submission.id}
+                      onClick={() => handleRowClick(submission)}
+                      className="cursor-pointer hover:bg-background-secondary transition-colors"
+                    >
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-foreground">
+                          {submission.fullName}
+                        </div>
+                        {submission.companyName && (
+                          <div className="text-xs text-foreground-secondary">
+                            {submission.companyName}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-foreground-secondary">
+                          {submission.email}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-foreground">
+                          {projectTypeLabel}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-foreground">
+                          {budgetLabel}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            statusColors[submission.status]
+                          }`}
+                        >
+                          {submission.status.replace("-", " ").toUpperCase()}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground-secondary">
+                        {new Date(submission.submittedAt).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          },
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
+
+      {/* Submission Modal */}
+      <SubmissionModal
+        submission={selectedSubmission}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onDelete={handleDelete}
+      />
     </div>
   );
 };

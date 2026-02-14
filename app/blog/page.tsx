@@ -1,8 +1,10 @@
 /**
  * Blog Page
  *
- * Coming soon page for blog - will be integrated with Supabase
- * Blog posts will be managed through the dashboard
+ * Coming soon page for the blog section.
+ * Blog posts will be managed through Supabase and the admin dashboard.
+ *
+ * @module app/blog/page
  */
 
 import { Metadata } from "next";
@@ -10,9 +12,9 @@ import { Container, Section, Heading, Paragraph } from "@/components";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
 
 export const metadata: Metadata = {
-  title: "Blog - Truqorun",
+  title: "Blog - Coming Soon | Truqorun",
   description:
-    "Insights and articles about web development, design, and technology - coming soon.",
+    "Our blog is coming soon! Check back later for articles about web development, design trends, and technology insights.",
 };
 
 export default function BlogPage() {
@@ -26,23 +28,36 @@ export default function BlogPage() {
         <Section spacing="xl">
           <Container size="md">
             <div className="text-center py-20">
-              {/* Icon/Emoji */}
-              <div className="mb-8 text-7xl">📝</div>
+              <div className="mb-8 text-6xl">📝</div>
 
-              {/* Heading */}
               <Heading level={1} className="mb-6">
                 Blog Coming Soon
               </Heading>
 
-              {/* Description */}
-              <Paragraph size="lg" className="mx-auto max-w-2xl mb-8">
-                We're working on bringing you insightful articles about web
-                development, design trends, and technology. Stay tuned for
-                updates!
+              <Paragraph size="lg" className="max-w-2xl mx-auto mb-8">
+                We're preparing amazing content about web development, design
+                trends, and technology insights. Check back soon for our latest
+                articles!
               </Paragraph>
 
-              {/* Accent line */}
-              <div className="mx-auto w-24 h-1 bg-linear-to-r from-primary via-accent to-success rounded-full"></div>
+              <div className="inline-flex items-center gap-2 text-sm text-foreground-secondary bg-card border border-border rounded-lg px-6 py-3">
+                <svg
+                  className="w-5 h-5 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>
+                  Blog posts will be managed through our admin dashboard
+                </span>
+              </div>
             </div>
           </Container>
         </Section>

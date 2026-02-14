@@ -29,9 +29,6 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://truqorun.com",
-  ),
   title: "Truqorun - Modern Web Development Solutions",
   description:
     "Premium web development services with cutting-edge technology and 24-hour response time. We build modern, scalable applications that drive business growth.",

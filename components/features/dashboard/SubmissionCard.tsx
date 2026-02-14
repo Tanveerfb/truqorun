@@ -21,12 +21,15 @@ import {
 
 interface SubmissionCardProps {
   submission: FormSubmission;
+  onDelete?: (id: string) => void;
 }
 
 export const SubmissionCard: React.FC<SubmissionCardProps> = ({
   submission,
+  onDelete,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const projectTypeLabel =
     PROJECT_TYPES.find((pt) => pt.value === submission.projectType)?.label ||
@@ -120,24 +123,25 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({
           </div>
 
           {/* Selected Features */}
-          {submission.selectedFeatures.length > 0 && (
-            <div>
-              <h4 className="mb-3 text-sm font-semibold text-foreground">
-                Selected Features
-              </h4>
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {submission.selectedFeatures.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-center gap-2 text-sm text-foreground-secondary"
-                  >
-                    <span className="text-primary">✓</span>
-                    {feature.replace(/-/g, " ")}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {Array.isArray(submission.selectedFeatures) &&
+            submission.selectedFeatures.length > 0 && (
+              <div>
+                <h4 className="mb-3 text-sm font-semibold text-foreground">
+                  Selected Features
+                </h4>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {submission.selectedFeatures.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-2 text-sm text-foreground-secondary"
+                    >
+                      <span className="text-primary">✓</span>
+                      {feature.replace(/-/g, " ")}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
           {/* Additional Features */}
           {submission.additionalFeatures && (
@@ -194,17 +198,19 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({
           )}
 
           {/* Contact Preferences */}
-          <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">
-              Contact Preferences
-            </h4>
-            <p className="text-sm text-foreground-secondary">
-              Best time to contact:{" "}
-              <span className="font-medium">
-                {submission.bestTimeToContact.replace("-", " ")}
-              </span>
-            </p>
-          </div>
+          {submission.bestTimeToContact && (
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-foreground">
+                Contact Preferences
+              </h4>
+              <p className="text-sm text-foreground-secondary">
+                Best time to contact:{" "}
+                <span className="font-medium">
+                  {submission.bestTimeToContact.replace("-", " ")}
+                </span>
+              </p>
+            </div>
+          )}
 
           {/* Notes */}
           {submission.notes && (
@@ -219,23 +225,60 @@ export const SubmissionCard: React.FC<SubmissionCardProps> = ({
           )}
 
           {/* Actions */}
-          <div className="flex items-center gap-3 border-t border-input-border pt-4">
-            {/* [PLACEHOLDER]: Add action buttons */}
-            <a
-              href={`mailto:${submission.email}`}
-              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Send Email
-            </a>
-            {submission.phone && (
+          <div className="flex items-center justify-between gap-3 border-t border-input-border pt-4">
+            <div className="flex items-center gap-3">
               <a
-                href={`tel:${submission.phone}`}
-                className="rounded-lg border border-input-border bg-input px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-input/80"
+                href={`mailto:${submission.email}`}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Call
+                Send Email
               </a>
+              {submission.phone && (
+                <a
+                  href={`tel:${submission.phone}`}
+                  className="rounded-lg border border-input-border bg-input px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-input/80"
+                >
+                  Call
+                </a>
+              )}
+            </div>
+
+            {onDelete && (
+              <button
+                onClick={async () => {
+                  if (
+                    confirm(
+                      "Are you sure you want to delete this submission? This action cannot be undone.",
+                    )
+                  ) {
+                    setIsDeleting(true);
+                    try {
+                      const response = await fetch(
+                        `/api/admin/submissions/${submission.id}`,
+                        {
+                          method: "DELETE",
+                        },
+                      );
+
+                      if (response.ok) {
+                        onDelete(submission.id);
+                      } else {
+                        alert("Failed to delete submission");
+                      }
+                    } catch (error) {
+                      console.error("Delete error:", error);
+                      alert("An error occurred while deleting");
+                    } finally {
+                      setIsDeleting(false);
+                    }
+                  }
+                }}
+                disabled={isDeleting}
+                className="rounded-lg border border-danger bg-danger/10 px-4 py-2 text-sm font-medium text-danger transition-colors hover:bg-danger/20 disabled:opacity-50"
+              >
+                {isDeleting ? "Deleting..." : "Delete"}
+              </button>
             )}
-            {/* [TODO]: Add status update button, notes editor */}
           </div>
         </div>
       )}

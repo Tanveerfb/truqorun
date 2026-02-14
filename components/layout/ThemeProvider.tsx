@@ -49,31 +49,38 @@ export function ThemeProvider({
   children,
   defaultTheme = 'system',
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+  // Initialize theme from localStorage or default (lazy initializer to avoid setState in effect)
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return defaultTheme;
+    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    return savedTheme || defaultTheme;
+  });
+  
   const [mounted, setMounted] = useState(false);
 
-  // Handle theme changes
+  // Calculate resolved theme
+  const getResolvedTheme = (): 'light' | 'dark' => {
+    if (typeof window === 'undefined') return 'light';
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    return theme === 'system' ? systemTheme : theme;
+  };
+
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(getResolvedTheme);
+
+  // Mark as mounted
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    
-    // Load theme from localStorage or use default
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setThemeState(savedTheme);
-    }
   }, []);
 
+  // Apply theme changes to DOM
   useEffect(() => {
     if (!mounted) return;
 
     const root = document.documentElement;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-
-    const activeTheme = theme === 'system' ? systemTheme : theme;
-    setResolvedTheme(activeTheme);
+    const activeTheme = getResolvedTheme();
 
     // Apply theme to HTML element
     if (activeTheme === 'dark') {
@@ -82,9 +89,13 @@ export function ThemeProvider({
       root.classList.remove('dark');
     }
 
+    // Update resolved theme state only if different
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setResolvedTheme(activeTheme);
+
     // Save to localStorage
     localStorage.setItem('theme', theme);
-  }, [theme, mounted]);
+  }, [theme, mounted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Listen for system theme changes
   useEffect(() => {
@@ -92,7 +103,8 @@ export function ThemeProvider({
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = (e: MediaQueryListEvent) => {
-      setResolvedTheme(e.matches ? 'dark' : 'light');
+      const newTheme = e.matches ? 'dark' : 'light';
+      setResolvedTheme(newTheme);
       const root = document.documentElement;
       if (e.matches) {
         root.classList.add('dark');

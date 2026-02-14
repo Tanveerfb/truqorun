@@ -86,7 +86,7 @@ export default function Home() {
           <Card className="text-center">
             <h2 className="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
             <p className="mb-6 text-lg text-foreground-secondary">
-              Let's discuss your project and build something amazing together.
+              Let&apos;s discuss your project and build something amazing together.
             </p>
             <Button variant="primary" size="lg">
               Contact Us

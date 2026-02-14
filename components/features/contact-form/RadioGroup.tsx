@@ -38,7 +38,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   required = false,
 }) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3" role="radiogroup" aria-required={required}>
       {options.map((option) => (
         <label
           key={option.value}
@@ -60,11 +60,15 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
             onChange={(e) => onChange(e.target.value)}
             required={required}
             className="mt-1 h-4 w-4 text-primary focus:ring-primary"
+            aria-describedby={option.description ? `${name}-${option.value}-description` : undefined}
           />
           <div className="flex-1">
             <div className="font-medium text-foreground">{option.label}</div>
             {option.description && (
-              <div className="mt-1 text-sm text-foreground-secondary">
+              <div 
+                id={`${name}-${option.value}-description`}
+                className="mt-1 text-sm text-foreground-secondary"
+              >
                 {option.description}
               </div>
             )}
@@ -72,7 +76,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
         </label>
       ))}
       {error && (
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>
       )}
     </div>
   );

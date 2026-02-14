@@ -33,6 +33,7 @@ export const Main: React.FC<MainProps> = ({
 }) => {
   return (
     <main
+      id="main-content"
       className={`flex-1 ${className}`}
       {...props}
     >

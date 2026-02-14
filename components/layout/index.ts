@@ -16,3 +16,4 @@ export { Header } from './Header';
 export { Footer } from './Footer';
 export { Main } from './Main';
 export { Section } from './Section';
+export { ErrorBoundary } from './ErrorBoundary';

@@ -293,7 +293,7 @@ export const ContactFormWizard: React.FC = () => {
           placeholder="Describe your project goals, target audience, key features, and any specific requirements..."
         />
         {errors.projectBrief && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.projectBrief}
           </p>
         )}
@@ -336,7 +336,7 @@ export const ContactFormWizard: React.FC = () => {
           placeholder="https://example.com"
         />
         {errors.companyWebsite && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.companyWebsite}
           </p>
         )}
@@ -396,7 +396,7 @@ export const ContactFormWizard: React.FC = () => {
           placeholder="John Doe"
         />
         {errors.fullName && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.fullName}
           </p>
         )}
@@ -422,7 +422,7 @@ export const ContactFormWizard: React.FC = () => {
           placeholder="john@example.com"
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.email}
           </p>
         )}
@@ -447,7 +447,7 @@ export const ContactFormWizard: React.FC = () => {
           placeholder="+61 400 000 000"
         />
         {errors.phone && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
             {errors.phone}
           </p>
         )}
@@ -576,7 +576,7 @@ export const ContactFormWizard: React.FC = () => {
         </div>
 
         {submitError && (
-          <div className="rounded-lg bg-red-50 p-4 dark:bg-red-900/20">
+          <div className="rounded-lg bg-red-50 p-4 dark:bg-red-900/20" role="alert">
             <p className="text-sm text-red-600 dark:text-red-400">
               {submitError}
             </p>
@@ -639,6 +639,18 @@ export const ContactFormWizard: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-3xl">
+      {/* Screen reader announcement for step changes */}
+      <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {FORM_STEPS[currentStep - 1]?.title}
+      </div>
+
+      {/* Error announcements for screen readers */}
+      {Object.keys(errors).length > 0 && (
+        <div className="sr-only" role="alert" aria-live="assertive" aria-atomic="true">
+          Please correct the following errors: {Object.values(errors).join(', ')}
+        </div>
+      )}
+
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -653,6 +665,7 @@ export const ContactFormWizard: React.FC = () => {
                       ? 'border-green-500 bg-green-500 text-white'
                       : 'border-gray-300 bg-white text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400'
                   }`}
+                  aria-label={`Step ${step.id}: ${step.title}${currentStep === step.id ? ' (current)' : currentStep > step.id ? ' (completed)' : ''}`}
                 >
                   {currentStep > step.id ? '✓' : step.id}
                 </div>
@@ -675,6 +688,7 @@ export const ContactFormWizard: React.FC = () => {
                       ? 'bg-green-500'
                       : 'bg-gray-300 dark:bg-gray-600'
                   }`}
+                  aria-hidden="true"
                 />
               )}
             </React.Fragment>
@@ -683,7 +697,9 @@ export const ContactFormWizard: React.FC = () => {
       </div>
 
       {/* Step Content */}
-      <div className="mb-8 min-h-[400px]">{renderStep()}</div>
+      <div className="mb-8 min-h-[400px]" role="region" aria-label={`Step ${currentStep}: ${FORM_STEPS[currentStep - 1]?.title}`}>
+        {renderStep()}
+      </div>
 
       {/* Navigation Buttons */}
       <div className="flex items-center justify-between gap-4">

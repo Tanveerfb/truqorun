@@ -166,6 +166,31 @@ All components include:
 
 ---
 
+## ♿ Accessibility
+
+We take accessibility seriously at Truqorun. Our website includes:
+
+- **WCAG 2.1 AA Compliance** - Following web accessibility guidelines
+- **Keyboard Navigation** - Full keyboard support with visible focus indicators
+- **Screen Reader Support** - ARIA labels, live regions, and semantic HTML
+- **Skip Links** - Quick navigation to main content
+- **Mobile Navigation** - Accessible mobile menu with proper ARIA attributes
+- **Form Accessibility** - Error announcements, field descriptions, and validation
+- **Color Contrast** - Proper contrast ratios for text and UI elements
+- **Responsive Design** - Works on all devices and screen sizes
+
+### Accessibility Features
+
+- Skip-to-content link for keyboard users
+- ARIA live regions for dynamic content updates
+- Proper heading hierarchy (h1-h6)
+- Alt text for all images (where applicable)
+- Focus management in modals and overlays
+- Error messages with role="alert"
+- Form labels and field descriptions
+
+---
+
 ## 📝 Available Scripts
 
 ```bash
@@ -197,29 +222,59 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) for commi
 
 ### Current Version: 0.1.0
 
-### Upcoming Features
+### ✅ Completed Features
 
-- [ ] Authentication system
-- [ ] Database integration
-- [ ] API routes and endpoints
-- [ ] Admin dashboard
-- [ ] Blog system
-- [ ] Portfolio showcase
-- [ ] Contact form with email integration
-- [ ] Analytics integration
-- [ ] SEO optimization
+- [x] **Multi-step Contact Form** - 5-step wizard with validation
+- [x] **Dashboard System** - Form submissions management
+- [x] **Design System** - Comprehensive UI component library
+- [x] **Dark Mode** - System-aware theme switching
+- [x] **Responsive Navigation** - Mobile menu with accessibility
+- [x] **Database Integration** - Supabase backend setup
+- [x] **API Routes** - Form submission endpoints
+- [x] **Accessibility Features** - WCAG 2.1 AA compliant
+- [x] **Error Handling** - Error boundaries and validation
+- [x] **TypeScript** - Full type safety throughout
+
+### 🚧 In Progress
+
+- [ ] **Email Notifications** - Resend integration (ready to configure)
+- [ ] **Testing Infrastructure** - Jest + React Testing Library
+- [ ] **Content Integration** - Fill remaining placeholders
+- [ ] **Documentation** - Component usage examples
+
+### 📋 Upcoming Features
+
+**High Priority (Good First Issues)**
+- [ ] Dashboard authentication system
+- [ ] Rate limiting for API endpoints
+- [ ] Blog CMS integration (MDX or Sanity)
+- [ ] Portfolio project detail pages
+- [ ] Image optimization and upload support
+- [ ] Newsletter signup integration
+- [ ] SEO optimization (meta tags, sitemap)
+
+**Medium Priority**
+- [ ] Analytics integration (Vercel/Google Analytics)
 - [ ] Performance monitoring
-- [ ] Unit and integration tests
-- [ ] CI/CD pipeline
-- [ ] Internationalization (i18n)
+- [ ] E2E testing (Playwright)
+- [ ] Advanced dashboard features (export, filtering)
+- [ ] Social sharing buttons
+- [ ] Search functionality
 
-### Long-term Goals
+**Low Priority**
+- [ ] CI/CD pipeline enhancements
+- [ ] Internationalization (i18n)
+- [ ] Advanced animations and transitions
+- [ ] A/B testing framework
+
+### 🔮 Long-term Goals
 
 - [ ] Mobile app (React Native)
-- [ ] CMS integration
+- [ ] Headless CMS integration
 - [ ] E-commerce features
-- [ ] Payment processing
+- [ ] Payment processing (Stripe)
 - [ ] Team collaboration features
+- [ ] API documentation with Swagger
 
 ---
 
@@ -245,9 +300,13 @@ For security concerns, please review our [Security Policy](SECURITY.md).
 
 ## 📞 Contact
 
-- **Email**: hello@truqorun.com [PLACEHOLDER]
-- **Website**: [truqorun.com](https://truqorun.com) [PLACEHOLDER]
-- **LinkedIn**: [Truqorun](https://linkedin.com/company/truqorun) [PLACEHOLDER]
+Interested in working with us? We'd love to hear from you!
+
+- **Email**: [hello@truqorun.com](mailto:hello@truqorun.com)
+- **GitHub**: [github.com/Tanveerfb/truqorun](https://github.com/Tanveerfb/truqorun)
+- **Issue Tracker**: [Report a bug or request a feature](https://github.com/Tanveerfb/truqorun/issues)
+
+For project inquiries and quotes, please visit our [Contact Page](https://truqorun.com/contact).
 
 ---
 

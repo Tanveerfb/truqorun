@@ -5,9 +5,10 @@
  * 
  * @example
  * ```tsx
- * import { ThemeProvider, ThemeToggle } from '@/components/layout';
+ * import { ThemeProvider, ThemeToggle, Navigation } from '@/components/layout';
  * ```
  */
 
 export { ThemeProvider, useTheme } from './ThemeProvider';
 export { ThemeToggle } from './ThemeToggle';
+export { Navigation } from './Navigation';

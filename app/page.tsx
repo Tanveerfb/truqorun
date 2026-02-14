@@ -8,20 +8,13 @@
  */
 
 import { Container, Card, Button } from "@/components";
-import { ThemeToggle } from "@/components/layout";
+import { Navigation } from "@/components/layout";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className="border-b border-border">
-        <Container>
-          <div className="flex h-16 items-center justify-between">
-            <h1 className="text-xl font-bold">Truqorun</h1>
-            <ThemeToggle />
-          </div>
-        </Container>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="py-20">

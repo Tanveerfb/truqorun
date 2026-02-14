@@ -42,7 +42,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3" role="group" aria-label="Feature selection">
       {options.map((option) => (
         <label
           key={option.id}
@@ -61,11 +61,15 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             checked={selectedValues.includes(option.id)}
             onChange={() => handleToggle(option.id)}
             className="mt-1 h-4 w-4 rounded text-primary focus:ring-primary"
+            aria-describedby={option.description ? `checkbox-${option.id}-description` : undefined}
           />
           <div className="flex-1">
             <div className="font-medium text-foreground">{option.label}</div>
             {option.description && (
-              <div className="mt-1 text-sm text-foreground-secondary">
+              <div 
+                id={`checkbox-${option.id}-description`}
+                className="mt-1 text-sm text-foreground-secondary"
+              >
                 {option.description}
               </div>
             )}
@@ -73,7 +77,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
         </label>
       ))}
       {error && (
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>
       )}
     </div>
   );

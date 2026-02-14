@@ -70,7 +70,7 @@ export const ContactFormWizard: React.FC = () => {
   /**
    * Update form field value
    */
-  const updateField = (field: keyof ContactFormData, value: any) => {
+  const updateField = (field: keyof ContactFormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error for this field when user starts typing
     if (errors[field]) {
@@ -372,7 +372,7 @@ export const ContactFormWizard: React.FC = () => {
           How can we reach you?
         </h3>
         <p className="text-sm text-foreground-secondary">
-          We'll use this information to send you a quote and discuss your project
+          We&apos;ll use this information to send you a quote and discuss your project
         </p>
       </div>
 
@@ -620,7 +620,7 @@ export const ContactFormWizard: React.FC = () => {
           Your project inquiry has been successfully submitted.
         </p>
         <p className="text-sm text-green-700 dark:text-green-300">
-          We'll review your information and get back to you within 24 hours with a
+          We&apos;ll review your information and get back to you within 24 hours with a
           detailed quote and next steps.
         </p>
         <button

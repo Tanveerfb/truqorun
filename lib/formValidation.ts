@@ -84,8 +84,7 @@ export const contactFormSchema = z.object({
  */
 export function validateField(
   fieldName: keyof ContactFormData,
-  value: any,
-  formData?: Partial<ContactFormData>
+  value: string | string[]
 ): string | null {
   try {
     const fieldSchema = contactFormSchema.shape[fieldName as keyof typeof contactFormSchema.shape];
@@ -113,7 +112,7 @@ export function validateForm(formData: Partial<ContactFormData>): FormErrors {
   } catch (error) {
     if (error instanceof z.ZodError) {
       const issues = error.issues || [];
-      issues.forEach((err: any) => {
+      issues.forEach((err: { path?: (string | number)[]; message?: string }) => {
         const path = (err.path || []).join('.');
         errors[path] = err.message || 'Invalid value';
       });

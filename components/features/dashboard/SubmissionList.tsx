@@ -40,11 +40,32 @@ export const SubmissionList: React.FC = () => {
   }, []);
 
   /**
+   * Filter and sort submissions
+   */
+  const filterAndSortSubmissions = React.useCallback(() => {
+    let filtered = [...submissions];
+
+    // Apply status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter((sub) => sub.status === statusFilter);
+    }
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      const dateA = new Date(a.submittedAt).getTime();
+      const dateB = new Date(b.submittedAt).getTime();
+      return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+
+    setFilteredSubmissions(filtered);
+  }, [submissions, statusFilter, sortOrder]);
+
+  /**
    * Filter and sort submissions when filter/sort changes
    */
   useEffect(() => {
     filterAndSortSubmissions();
-  }, [submissions, statusFilter, sortOrder]);
+  }, [filterAndSortSubmissions]);
 
   const loadSubmissions = async () => {
     // Check if Supabase is configured
@@ -86,24 +107,6 @@ export const SubmissionList: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const filterAndSortSubmissions = () => {
-    let filtered = [...submissions];
-
-    // Apply status filter
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter((sub) => sub.status === statusFilter);
-    }
-
-    // Apply sorting
-    filtered.sort((a, b) => {
-      const dateA = new Date(a.submittedAt).getTime();
-      const dateB = new Date(b.submittedAt).getTime();
-      return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
-    });
-
-    setFilteredSubmissions(filtered);
   };
 
   const handleRefresh = () => {

@@ -7,6 +7,7 @@ import {
   Card,
   Button,
 } from "@/components";
+import { Accordion } from "@/components/ui/Accordion";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
 import Link from "next/link";
 
@@ -254,8 +255,47 @@ export default function EcommercePage() {
           </Container>
         </Section>
 
+        {/* FAQ Section */}
+        <Section spacing="lg">
+          <Container size="md">
+            <Heading level={2} className="text-center mb-8">
+              E-commerce FAQs
+            </Heading>
+            <Accordion
+              items={[
+                {
+                  title: "Which e-commerce platform do you use?",
+                  content:
+                    "We build custom storefronts using Next.js paired with headless commerce backends like Shopify Storefront API or Snipcart. This gives you full design control with reliable payment and inventory management behind the scenes.",
+                },
+                {
+                  title: "Can you migrate my existing store?",
+                  content:
+                    "Yes. We can migrate products, customers, and order history from platforms like WooCommerce, Magento, or legacy Shopify themes. We map everything carefully so nothing is lost during the transition.",
+                },
+                {
+                  title: "How do you handle payments?",
+                  content:
+                    "We integrate with trusted payment gateways like Stripe. All transactions are processed over HTTPS with PCI-compliant providers—we never store card details on your server.",
+                },
+                {
+                  title: "Will my store work on mobile?",
+                  content:
+                    "Absolutely. Every storefront we build is mobile-first and responsive. Product browsing, cart management, and checkout are all optimised for phones and tablets.",
+                },
+                {
+                  title: "Can I manage products myself?",
+                  content:
+                    "Yes. We set up an admin dashboard or integrate with a headless CMS so you can add, edit, and remove products without any developer involvement.",
+                },
+              ]}
+              allowMultiple
+            />
+          </Container>
+        </Section>
+
         {/* CTA Section */}
-        <Section spacing="lg" background="secondary">
+        <Section spacing="lg">
           <Container size="md">
             <Card className="text-center">
               <Heading level={2} className="mb-4">

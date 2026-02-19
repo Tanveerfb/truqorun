@@ -7,6 +7,7 @@ import {
   Card,
   Button,
 } from "@/components";
+import { Accordion } from "@/components/ui/Accordion";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
 import Link from "next/link";
 
@@ -321,8 +322,47 @@ export default function MaintenanceSupportPage() {
           </Container>
         </Section>
 
+        {/* FAQ Section */}
+        <Section spacing="lg">
+          <Container size="md">
+            <Heading level={2} className="text-center mb-8">
+              Maintenance & Support FAQs
+            </Heading>
+            <Accordion
+              items={[
+                {
+                  title: "What does a maintenance plan include?",
+                  content:
+                    "Plans typically cover dependency updates, security patches, uptime monitoring, regular backups, and a set number of hours for content changes or small feature tweaks each month.",
+                },
+                {
+                  title: "How quickly do you respond to issues?",
+                  content:
+                    "Critical issues like downtime or security vulnerabilities are addressed within hours. Non-urgent requests are handled within 1–2 business days depending on your plan.",
+                },
+                {
+                  title: "Do I need a long-term contract?",
+                  content:
+                    "No. All maintenance plans are month-to-month. You can cancel anytime, though we recommend keeping at least security updates active.",
+                },
+                {
+                  title: "Can you maintain a site you didn\u2019t build?",
+                  content:
+                    "Yes. We start with a codebase audit to understand the tech stack and identify any immediate issues. From there, we can take over ongoing maintenance.",
+                },
+                {
+                  title: "How do I request changes?",
+                  content:
+                    "Just send us an email or message. We confirm receipt, give you a timeline, and keep you updated as the work is completed. You also get monthly reports summarising everything we did.",
+                },
+              ]}
+              allowMultiple
+            />
+          </Container>
+        </Section>
+
         {/* CTA Section */}
-        <Section spacing="lg" background="secondary">
+        <Section spacing="lg">
           <Container size="md">
             <Card className="text-center">
               <Heading level={2} className="mb-4">

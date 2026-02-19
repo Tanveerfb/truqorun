@@ -26,7 +26,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Additional CSS classes */
   className?: string;
   /** Visual variant of the card */
-  variant?: "default" | "elevated" | "outlined" | "flat";
+  variant?: "default" | "elevated" | "outlined" | "flat" | "glass";
   /** Whether the card should have hover effects */
   hoverable?: boolean;
 }
@@ -48,6 +48,7 @@ export const Card: React.FC<CardProps> = ({
     elevated: "bg-card shadow-lg border-0",
     outlined: "border-2 border-border bg-transparent",
     flat: "bg-background-secondary border-0",
+    glass: "border border-white/20 bg-card/60 backdrop-blur-xl shadow-lg",
   };
 
   const hoverStyles = hoverable

@@ -8,6 +8,7 @@ import {
   Button,
 } from "@/components";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
+import { Accordion } from "@/components/ui/Accordion";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -199,8 +200,46 @@ export default function BusinessLandingPagesPage() {
           </Container>
         </Section>
 
-        {/* CTA Section */}
+        {/* FAQ Section */}
         <Section spacing="lg" background="secondary">
+          <Container size="md">
+            <Heading level={2} className="mb-8 text-center">
+              Frequently Asked Questions
+            </Heading>
+            <Accordion
+              items={[
+                {
+                  title: "How long does it take to build a landing page?",
+                  content:
+                    "Typically 1-2 weeks from design approval to launch. Simple pages can be faster, complex ones with custom animations or integrations may take a bit longer. We'll give you an exact timeline during the quote.",
+                },
+                {
+                  title: "What if I need to make changes after launch?",
+                  content:
+                    "We build pages in a way that makes updates straightforward. Need to tweak copy, swap images, or adjust layouts? We can handle that quickly. We also offer ongoing maintenance plans if you need regular updates.",
+                },
+                {
+                  title: "Do you handle domain and hosting?",
+                  content:
+                    "We typically deploy to Vercel, which provides free hosting with excellent performance. We can help you set up your custom domain and handle all the technical configuration.",
+                },
+                {
+                  title: "Will my landing page be mobile-friendly?",
+                  content:
+                    "Absolutely. We build mobile-first, meaning the mobile experience is designed first and then enhanced for larger screens. Your page will look great on all devices.",
+                },
+                {
+                  title: "Do you provide analytics and tracking?",
+                  content:
+                    "Yes, every landing page includes analytics integration (Google Analytics or Plausible). We set up proper event tracking for buttons, form submissions, and key interactions so you can measure performance.",
+                },
+              ]}
+            />
+          </Container>
+        </Section>
+
+        {/* CTA Section */}
+        <Section spacing="lg">
           <Container size="md">
             <Card className="text-center">
               <Heading level={2} className="mb-4">

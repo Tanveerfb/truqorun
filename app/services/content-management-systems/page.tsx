@@ -7,6 +7,7 @@ import {
   Card,
   Button,
 } from "@/components";
+import { Accordion } from "@/components/ui/Accordion";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
 import Link from "next/link";
 
@@ -293,8 +294,47 @@ export default function CMSPage() {
           </Container>
         </Section>
 
+        {/* FAQ Section */}
+        <Section spacing="lg">
+          <Container size="md">
+            <Heading level={2} className="text-center mb-8">
+              CMS FAQs
+            </Heading>
+            <Accordion
+              items={[
+                {
+                  title: "Do I need technical skills to use the CMS?",
+                  content:
+                    "Not at all. We design the editing experience so that anyone comfortable with a word processor can manage content. We also provide a walkthrough session once the site is live.",
+                },
+                {
+                  title: "Can multiple people edit content at the same time?",
+                  content:
+                    "Yes. We set up role-based access so editors, authors, and admins each have appropriate permissions. Collaboration features depend on the CMS platform chosen.",
+                },
+                {
+                  title: "Which CMS platforms do you work with?",
+                  content:
+                    "We build custom CMS solutions with headless platforms like Sanity, Contentful, or Strapi paired with a Next.js frontend. For simpler needs, MDX-based content management is also an option.",
+                },
+                {
+                  title: "Can I preview changes before publishing?",
+                  content:
+                    "Yes. We implement draft/preview modes so you can see exactly how content will look on the live site before hitting publish.",
+                },
+                {
+                  title: "What about SEO for CMS-managed content?",
+                  content:
+                    "Every CMS page includes editable meta titles, descriptions, and Open Graph fields. We also generate sitemaps automatically and add structured data where appropriate.",
+                },
+              ]}
+              allowMultiple
+            />
+          </Container>
+        </Section>
+
         {/* CTA Section */}
-        <Section spacing="lg" background="secondary">
+        <Section spacing="lg">
           <Container size="md">
             <Card className="text-center">
               <Heading level={2} className="mb-4">

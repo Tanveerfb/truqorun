@@ -27,6 +27,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { RadioGroup } from "./RadioGroup";
 import { CheckboxGroup } from "./CheckboxGroup";
 import type { ContactFormData, SubmissionResponse } from "@/types/form";
@@ -140,14 +141,23 @@ export const ContactFormWizard: React.FC = () => {
 
       if (result.success) {
         setSubmitSuccess(true);
+        toast.success("Inquiry submitted successfully!", {
+          description: "We'll get back to you within 24 hours.",
+        });
       } else {
         setSubmitError(
           result.error || "Failed to submit form. Please try again.",
         );
+        toast.error("Submission failed", {
+          description: result.error || "Please try again.",
+        });
       }
     } catch (error) {
       console.error("Form submission error:", error);
       setSubmitError("An unexpected error occurred. Please try again later.");
+      toast.error("An unexpected error occurred", {
+        description: "Please try again later.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -734,7 +744,7 @@ export const ContactFormWizard: React.FC = () => {
 
       {/* Step Content */}
       <div
-        className="mb-8 min-h-[400px]"
+        className="mb-8 min-h-100"
         role="region"
         aria-label={`Step ${currentStep}: ${FORM_STEPS[currentStep - 1]?.title}`}
       >

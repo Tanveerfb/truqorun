@@ -9,6 +9,7 @@
 import { Metadata } from "next";
 import { Container, Section, Heading, Paragraph, Card } from "@/components";
 import { Header, Footer, Main, Navigation } from "@/components/layout";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About Us - Truqorun",
@@ -121,9 +122,11 @@ export default function AboutPage() {
               {/* Tanveer Singh - Founder & Lead Developer */}
               <Card>
                 <div className="mb-4 h-64 rounded-lg overflow-hidden flex items-center justify-center bg-background-secondary">
-                  <img
+                  <Image
                     src="/team/tanveer.png"
                     alt="Tanveer Singh - Founder & Lead Developer"
+                    width={400}
+                    height={256}
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -193,9 +196,11 @@ export default function AboutPage() {
               {/* Muhammad Mustafa - Public Relations Manager */}
               <Card>
                 <div className="mb-4 h-64 rounded-lg overflow-hidden flex items-center justify-center bg-background-secondary">
-                  <img
+                  <Image
                     src="/team/mustafa.png"
                     alt="Muhammad Mustafa - Public Relations Manager"
+                    width={400}
+                    height={256}
                     className="h-full w-full object-cover"
                   />
                 </div>

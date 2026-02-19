@@ -5,12 +5,12 @@
  *
  * Features:
  * - Validates form data using Zod schema
+ * - Rate limits submissions per IP (via Upstash Redis)
  * - Stores submission in Supabase database
  * - Sends email notification to admin
  * - Returns success/error response
  *
  * [SECURITY]: All sensitive operations are server-side only
- * [PLACEHOLDER]: Add rate limiting and spam protection
  *
  * @module app/api/contact/submit/route
  */
@@ -18,6 +18,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase";
 import { contactFormSchema, sanitizeFormData } from "@/lib/formValidation";
+import { checkRateLimit } from "@/lib/rateLimit";
 import type { ContactFormData } from "@/types/form";
 
 /**
@@ -25,6 +26,24 @@ import type { ContactFormData } from "@/types/form";
  */
 export async function POST(request: NextRequest) {
   try {
+    // --- Rate limiting ---
+    const forwarded = request.headers.get("x-forwarded-for");
+    const ip = forwarded?.split(",")[0]?.trim() ?? "anonymous";
+    const { allowed, retryAfter } = await checkRateLimit(ip);
+
+    if (!allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Too many submissions. Please try again later.",
+        },
+        {
+          status: 429,
+          headers: { "Retry-After": String(retryAfter) },
+        },
+      );
+    }
+
     // Parse request body
     const body = await request.json();
 
